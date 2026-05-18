@@ -1,0 +1,10 @@
+.active > .page-link, .page-link.active {
+    color: var(--white) !important;
+    background-color: var(--gold);
+    border-color: var(--gold);
+}
+.page-item{
+    .page-link{
+        color: var(--gold);
+    }
+}

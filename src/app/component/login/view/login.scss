@@ -1,0 +1,404 @@
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+// ───────────────── RESET ─────────────────
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// ───────────────── PAGE ─────────────────
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: var(--font-family);
+  background: var(--bg-page)
+}
+
+
+// ───────────────── WRAP ─────────────────
+.wrap {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+
+// ───────────────── BRAND ─────────────────
+
+.brand {
+
+  display: flex;
+  text-align: center;
+  margin-bottom: 24px;
+  flex-direction: column;
+  align-items: center;
+  &__title {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+
+  &__sub {
+    font-size: 10px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+}
+.brand__logo {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  background-color: var(--bg-page);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.brand__logo-img {
+  width: 40px;
+  height: 40px;
+  // background-color:var(--white);
+  object-fit: contain;
+}
+
+.brand__title {
+  margin-top: 0.4rem;
+}
+// ───────────────── CARD ─────────────────
+.card {
+  width: 100%;
+  background: var(--bg-box);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--card);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  font-weight: 300;
+}
+// ───────────────── FORM ─────────────────
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+// ───────────────── FIELD ─────────────────
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  &--err .input {
+    border-color: var(--error);
+  }
+}
+.label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--label);
+}
+// FORGOT PASSWORD COLOR CHANGE
+.link {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--pass-link);
+  text-decoration: none;
+  transition: var(--ease);
+  &:hover {
+    color: var(--primary-hover);
+  }
+}
+// ───────────────── INPUT ─────────────────
+.input-wrap {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  border: 1.4px solid rgba(221, 214, 254, 0.65);
+  background: var(--bg-page);
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color:var(--input-color);
+  outline: none;
+  transition:
+    border-color var(--ease),
+    // box-shadow var(--ease),
+    background var(--ease);
+  // PLACEHOLDER COLOR CHANGE
+  &::placeholder {
+    color:var(--place-holder);
+    font-size: 11px;
+  }
+  &:hover {
+    border-color: var(hover);
+  }
+
+  &:focus {
+    border-color: var(--border-focus);
+    // box-shadow: var(--shadow-focus);
+    background: var(--white);
+  }
+
+  &--icon {
+    padding-right: 48px;
+  }
+}
+// ───────────────── EYE ICON ─────────────────
+.eye {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 10px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  color:var(--eye-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--ease);
+  &:hover {
+    background: rgba(108, 71, 255, 0.08);
+    color: var(--primary);
+  }
+}
+// ───────────────── ERROR ─────────────────
+
+.err {
+
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--error);
+}
+.api-err {
+
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: var(--error);
+  font-size: 13px;
+  text-align: center;
+}
+// ───────────────── CHECKBOX ─────────────────
+.check {
+
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.check__input {
+
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  border: 1.5px solid #d6ccef;
+  border-radius: 4px;
+  background: var(--white);
+  position: relative;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+/* CHECKED STATE */
+
+.check__input:checked {
+
+  background: #6c47ff;
+  border-color: #6c47ff;
+}
+/* TICK MARK */
+
+.check__input:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.check__text {
+
+  font-size: 12px;
+  line-height: 1;
+  color: var(--check-text);
+  font-weight: 200;
+}
+// ───────────────── BUTTON ─────────────────
+
+.btn {
+  width: 100% !important;
+  height: 42px;
+  border: none;
+  border-radius:16px;
+  background: var( --button-gardian);
+  color:var(--white)!important;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 4px;
+  box-shadow: var(--shadow-btn);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform var(--ease),
+    box-shadow var(--ease);
+  // BUTTON TEXT FIX
+
+  span {
+    color:var(--white) !important;
+    // font-weight: 600;
+    display: block;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 10px 24px rgba(108, 71, 255, 0.28);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+// ───────────────── NOTE ─────────────────
+
+.note {
+  color: var(--check-text);
+  margin-top: 24px;
+  text-align: center;
+  font-size: 12px;
+  // color: var(--text);
+  // CONTACT ADMIN COLOR FIX
+  &__link {
+    color:var(--pass-link);
+    text-decoration: none;
+    font-weight: 500;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.note-head{
+  // color: var(--check-text);
+  font-weight: 200;
+  padding-right: 5px; 
+}
+
+// ───────────────── FOOTER ─────────────────
+.footer {
+
+  margin-top: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--footer);
+  &__dot {
+    opacity: 0.5;
+  }
+
+  &__link {
+    color: var(--footer);
+    text-decoration: none;
+    transition: var(--ease);
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+
+// ───────────────── RESPONSIVE ─────────────────
+
+@media (max-width: 480px) {
+  .page {
+    padding: 24px 16px;
+  }
+  .brand {
+    &__title {
+      font-size: 22px;
+    }
+    &__sub {
+      font-size: 12px;
+    }
+  }
+  .card {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .input {
+    height: 38px;
+    font-size: 13px;
+  }
+
+  .btn {
+    width: 100%;
+    height: 38px;
+    font-size: 13px;
+  }
+
+  .footer {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand__title {
+    font-size: 20px;
+  }
+  .brand__sub,
+  .label,
+  .check__text,
+  .note {
+    font-size: 12px;
+  }
+}

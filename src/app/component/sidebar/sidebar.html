@@ -1,0 +1,96 @@
+<nav class="sidebar">
+
+  <!-- ── Logo ──────────────────────────────────────────── -->
+  <div class="sidebar__logo">
+    <div class="sidebar__logo-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect x="2" y="2" width="10" height="10" rx="2" fill="white" opacity="0.9" />
+        <rect x="16" y="2" width="10" height="10" rx="2" fill="white" opacity="0.5" />
+        <rect x="2" y="16" width="10" height="10" rx="2" fill="white" opacity="0.5" />
+        <rect x="16" y="16" width="10" height="10" rx="2" fill="white" opacity="0.9" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- ── Nav Items ─────────────────────────────────────── -->
+  <ul class="sidebar__nav">
+
+    <ng-container *ngFor="let item of navItems">
+
+      <!-- ══════════════════════════════════════════════════
+           CASE A: Simple link (hasSubmenu = false)
+           ══════════════════════════════════════════════════ -->
+      <li *ngIf="!item.hasSubmenu" class="sidebar__item">
+        <!-- sidebar.html -->
+        <a class="sidebar__link" [routerLink]="item.route" routerLinkActive="sidebar__link--active"
+          [routerLinkActiveOptions]="{ exact: item.exact ?? false }" (click)="closeAll()">
+
+
+          <span class="sidebar__icon" [innerHTML]="item.iconSvg"></span>
+
+          <span class="sidebar__label">{{ item.label }}</span>
+        </a>
+      </li>
+
+      <!-- ══════════════════════════════════════════════════
+           CASE B: Expandable section (hasSubmenu = true)
+           ══════════════════════════════════════════════════ -->
+      <li *ngIf="item.hasSubmenu" class="sidebar__item sidebar__item--section"
+        [class.sidebar__item--open]="isOpen(item.key)">
+
+        <!-- Section trigger -->
+        <a class="sidebar__link" (click)="toggleSection(item.key)">
+
+          <!-- FIX: same SafeHtml binding on the wrapper span -->
+          <span class="sidebar__icon" [innerHTML]="item.iconSvg"></span>
+
+          <span class="sidebar__label">{{ item.label }}</span>
+
+          <!-- Chevron indicator -->
+          <span class="sidebar__chevron">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </span>
+        </a>
+
+        <!-- Sub-menu -->
+        <ul class="sidebar__submenu" [class.sidebar__submenu--open]="isOpen(item.key)">
+
+          <li *ngFor="let child of item.children" class="sidebar__subitem" (click)="handleMenuClick(child, $event)">
+
+            <span class="curve-helper"></span>
+
+            <a class="sidebar__sublink" [routerLink]="child.tag 
+    ? ['/dashboard', child.route, child.tag] 
+    : ['/dashboard', child.route]" routerLinkActive="sidebar__sublink--active"
+              [routerLinkActiveOptions]="{ exact: true }">
+
+              <span class="sidebar__subicon">
+                <svg width="16" height="16" [attr.viewBox]="child.iconViewBox || '0 0 24 24'" fill="none"
+                  stroke="currentColor" stroke-width="1.8">
+
+                  <path [attr.d]="child.iconPath"></path>
+
+                </svg>
+              </span>
+
+              <span>{{ child.label }}</span>
+
+              <!-- Optional nested chevron -->
+              <span *ngIf="child.hasChevron" class="sidebar__subchevron">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </span>
+
+            </a>
+          </li>
+
+        </ul>
+      </li>
+
+    </ng-container>
+
+  </ul>
+</nav>

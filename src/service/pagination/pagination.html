@@ -1,0 +1,26 @@
+<nav class="mt-3 float-end">
+  <ul class="pagination">
+
+    <!-- Previous -->
+    <li class="page-item" [class.disabled]="paginationService.currentPage === 1">
+      <a class="page-link" (click)="prev()">&laquo;</a>
+    </li>
+
+    <!-- Pages -->
+    <li 
+      class="page-item"
+      *ngFor="let p of pages"
+      [class.active]="p === paginationService.currentPage"
+    >
+      <a class="page-link" (click)="changePage(p)">
+        {{ p }}
+      </a>
+    </li>
+
+    <!-- Next -->
+    <li class="page-item" [class.disabled]="paginationService.currentPage === totalPages">
+      <a class="page-link" (click)="next()">&raquo;</a>
+    </li>
+
+  </ul>
+</nav>

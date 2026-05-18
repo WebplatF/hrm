@@ -1,0 +1,27 @@
+// ─── Global Reset ────────────────────────────────────────────────────────────
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: #f0f4f8;
+}
+
+// ─── App Shell ────────────────────────────────────────────────────────────────
+.app-shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+// ─── Main Content Area ────────────────────────────────────────────────────────
+.app-content {
+  position: relative;
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg-main);
+ 
+}

@@ -1,0 +1,109 @@
+@use './mixin' as *;
+
+.btn {
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 8px 14px !important;
+  width: 160px !important;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--white);
+  @include btn-hover-lift(var(--gold-light),var(--white),var(--gold));
+
+  &:focus,
+  &:active,
+  &.active {
+    outline: none;
+    box-shadow: none;
+  }
+}
+.btn-cancel {
+  border: 1px solid var(--gold) !important;
+  color: var(--gold) !important;
+  @include btn-hover-lift(var(--bg-sidebar),var(--white),var(--bg-sidebar));
+
+  &:focus,
+  &:active,
+  &.active {
+   
+    color: var(--white) !important;
+    background: var(--text-sub) !important;
+    outline: none;
+    box-shadow: none;   
+  }
+}
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border-muted);
+  background: var(--gold-light);
+  color: var(--text-light);
+  cursor: pointer;
+
+  @include icon-btn-hover();
+  &:focus,
+  &:active,
+  &.active {
+    background: var(--gold) !important;
+    color: var(--white) !important;
+    outline: none;
+    box-shadow: none;
+  }
+}
+.filter-tab {
+     padding: 8px 18px;
+  border-radius: 50px;
+  border: 1.5px solid #e8eaf0 ;
+  background: var(--white);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-light);
+  cursor: pointer;
+
+  // 🔥 smooth animation
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+
+  @include btn-hover-lift( var(--gold),var(--white),var(--gold));
+  @include ripple-effect();
+
+  &.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--white);
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(240,165,0,0.25);
+  }
+}
+
+
+.btn-submit{
+  background: var(--gold)!important;
+  color: var(--text-primary)!important;
+  padding: 4px 40px !important; 
+  border-radius: 0.375rem!important;
+ @include btn-hover-lift( var(--gold),var(--white),var(--gold));
+}
+.login-btn {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+
+  background: var(--bg-deep);
+  color: var(--white);
+
+  @include btn-hover-lift( var(--bg-hover),var(--white),var(--gold));
+ 
+}

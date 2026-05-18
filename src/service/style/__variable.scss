@@ -1,0 +1,84 @@
+
+$color-bg:           #F5F7FA;
+$color-surface:      #FFFFFF;
+$color-border:       #E8ECF0;
+$color-text-primary: #1A1D23;
+$color-text-secondary: #6B7280;
+$color-accent:       #4A90D9;
+$color-accent-light: #EBF4FF;
+$color-pending:      #F59E0B;
+$color-pending-bg:   #FFFBEB;
+$color-completed:    #10B981;
+$color-completed-bg: #ECFDF5;
+$color-rejected:     #EF4444;
+$color-rejected-bg:  #FEF2F2;
+$radius-sm:  6px;
+$radius-md:  10px;
+$radius-lg:  14px;
+$table-border: #e8eaf0;
+$table-hover: #f8fafc;
+$shadow-card: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+$shadow-hover: 0 4px 12px rgba(0,0,0,.10);
+
+:root {
+  --bg-page: #F9F2FE !important;
+  --bg-deep: #0d1117;
+  --bg-sidebar: #0d1b2e;
+  // --bg-hover: #1a2336;
+  --bg-box:#ffffff;
+  --check-text:#2f3239;   
+  --primary: #673DE6;
+  --primary-hover: #5a36e8;
+  --text: #111827;
+  --text-muted: #343435;
+  --placeholder: #ffffff;
+  // --bg-page: #F9F2FE !important;
+  // --bg-page: #FAF3FE;
+  --bg-card: rgba(255, 255, 255, 0.82);
+  // INPUT BACKGROUND CHANGE
+  --bg-input: #f7f2ff;
+  --pass-link:#7255D4;
+  
+  --border: #ddd6fe;
+  --border-focus: #8b5cf6;
+  --card: #e3dbfa;
+   --label: #050709;
+  --error: #ef4444;
+  --input-color:#4b5563;
+  --place-holder:#cdcdd8;
+  --hover:#c4b5fd;
+  --white:#ffffff;
+  --eye-color:#9ca3af;
+  --footer:#94a3b8;
+ --font-family: 'Inter', sans-serif;
+ --radius-lg :8px;
+ --avatar-text:#e8e0fd;
+  --avatar-bg:#6c3ff5;
+  --radius-full:9999px;
+
+
+//---------------------------------- Login Page Style ---------------------------------------------
+  --shadow-card:
+    0 8px 30px rgba(108, 71, 255, 0.06),
+    0 2px 6px rgba(0, 0, 0, 0.03);
+
+  --shadow-focus:
+    0 0 0 4px rgba(108, 71, 255, 0.10);
+
+  --shadow-btn:
+    0 8px 18px rgba(108, 71, 255, 0.24);
+
+  --font: 'Inter', sans-serif;
+
+  --ease: 0.25s ease;
+  --button-gardian:linear-gradient(135deg,
+      #7c5cff 0%,
+      #5b36ea 100%)
+
+}
+
+
+
+
+
+
