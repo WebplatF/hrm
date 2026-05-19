@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { routes } from '../../app.routes';
 
 @Component({
   selector: 'app-sidebar',
@@ -33,16 +34,31 @@ export class Sidebar {
     },
 
     {
-      name: 'Leaves & Permissions',
+    name: 'Attendance Management',
+    icon:"bi bi-journal-text",
+    route: '/attendance',
+   },
+
+   {
+      name: 'Permissions Management',
       icon: 'bi bi-calendar2-x',
-      route: '/leaves',
+      route: '/permissions',
     },
 
     {
+      name: 'Leave Management',
+      icon:'bi bi-calendar4-week',
+      route:'/leaves'
+    },
+    
+
+
+    {
       name: 'Holiday Management',
-      icon: 'bi bi-calendar',
+      icon: 'bi bi-calendar4',
       route: '/holidays',
     },
+    
 
   ];
 
