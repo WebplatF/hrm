@@ -1,6 +1,7 @@
 import { Component, input } from '@angular/core';
 import { Tablebody } from '../tablebody/tablebody';
 
+
 @Component({
   selector: 'app-employeelist',
   imports: [Tablebody],

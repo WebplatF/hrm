@@ -1,1 +1,61 @@
-<p>list works!</p>
+<ng-container *ngFor="let emp of employees">
+  <tr class="emp_row">
+
+    <!-- S.NO -->
+    <td class="col_sno">
+      <span class="sno_text">{{ formatSno(emp.sno) }}</span>
+    </td>
+
+    <!-- NAME + AVATAR -->
+    <td class="col_name">
+      <div class="name_cell">
+        <div
+          class="avatar"
+          [style.background-color]="emp.avatarColor"
+          [style.color]="emp.avatarTextColor"
+        >
+          {{ getInitials(emp.name) }}
+        </div>
+        <div class="name_info">
+          <span class="emp_name">{{ emp.name }}</span>
+          <span class="emp_role">{{ emp.role }}</span>
+        </div>
+      </div>
+    </td>
+
+    <!-- EMAIL -->
+    <td class="col_email">
+      <span class="emp_email">{{ emp.email }}</span>
+    </td>
+
+    <!-- DATE OF JOIN -->
+    <td class="col_date">
+      <span class="emp_date">{{ emp.dateOfJoin }}</span>
+    </td>
+
+    <!-- STATUS TOGGLE -->
+    <td class="col_status">
+      <div class="status_cell">
+        <label class="toggle_switch">
+          <input
+            type="checkbox"
+            [checked]="emp.isActive"
+            (change)="onToggleStatus(emp)"
+          />
+          <span class="toggle_slider"></span>
+        </label>
+        <span class="status_label" [class.active]="emp.isActive" [class.inactive]="!emp.isActive">
+          {{ emp.isActive ? 'Active' : 'Inactive' }}
+        </span>
+      </div>
+    </td>
+
+    <!-- ACTION — Edit Icon -->
+    <td class="col_edit">
+      <button class="edit_btn" (click)="onEdit(emp)" title="Edit Employee">
+        <i class="bi bi-pencil-square"></i>
+      </button>
+    </td>
+
+  </tr>
+</ng-container>

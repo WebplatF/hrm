@@ -1,1 +1,40 @@
-<p>tablebody works!</p>
+<div class="table_card">
+  <div class="table_header">
+    <h2 class="table_title">Employee Directory</h2>
+    <div class="table_actions">
+      <button class="action_btn">
+        <i class="bi bi-filter"></i> Filter
+      </button>
+      <button class="action_btn">
+        <i class="bi bi-download"></i> Export
+      </button>
+    </div>
+  </div>
+  <div class="table_wrap">
+    <table class="table">
+      <thead>
+        <tr class="table_head_row">
+          <th class="col_sno">S.NO</th>
+          <th class="col_name">NAME</th>
+          <th class="col_email">EMAIL</th>
+          <th class="col_date">DATE OF JOIN</th>
+          <th class="col_status">STATUS</th>
+          <th class="col_edit">ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody app-list></tbody>
+    </table>
+  </div>
+  <div class="table_footer">
+    <span class="table_count">Showing 1 to 4 of 10 employees</span>
+    <div class="pagination">
+      <button class="page_btn nav_btn"><i class="bi bi-chevron-left"></i></button>
+      <button class="page_btn active">1</button>
+      <button class="page_btn">2</button>
+      <button class="page_btn">3</button>
+      <span class="page_dots">...</span>
+      <button class="page_btn">10</button>
+      <button class="page_btn nav_btn"><i class="bi bi-chevron-right"></i></button>
+    </div>
+  </div>
+</div>
