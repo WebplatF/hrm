@@ -1,0 +1,85 @@
+<div class="employee_main_container">
+  <!-- ===== PAGE HEADER ===== -->
+
+  <div class="page_Header">
+    <button class="back_btn">
+      <i class="bi bi-arrow-left-short"></i>
+    </button>
+
+    <h2 class="page_title">Add New Employee</h2>
+  </div>
+
+  <!-- ===== FORM CARD ===== -->
+
+  <div class="employee_card">
+    <!-- CARD HEADER -->
+
+    <div class="card_header">
+      <h3 class="card_title">Employee Information</h3>
+
+      <p class="card_description">
+        Fill in the primary details to register a new member to the organization.
+      </p>
+    </div>
+
+    <!-- ===== CARD BODY ===== -->
+
+    <div class="card_body">
+      <!-- FORM GRID -->
+
+      <div class="form_grid">
+        <div class="form_group" *ngFor="let field of employeeFields">
+          <label>
+            {{ field.label }}
+          </label>
+
+          <input
+            *ngIf="field.type !== 'select'"
+            [type]="field.type"
+            [(ngModel)]="employeeData[field.model]"
+            [placeholder]="field.placeholder"
+          />
+
+
+          <!-- Select -->
+          <select *ngIf="field.type === 'select'" [(ngModel)]="employeeData[field.model]">
+            <option value="">Select Option</option>
+            <option [value]="option" *ngFor="let option of field.options">
+              {{ option }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ===== UPLOAD SECTION ===== -->
+
+      <div class="upload_section">
+        <!-- LEFT -->
+
+        <div class="upload_info">
+          <div class="upload_icon">
+            <i class="bi bi-camera"></i>
+          </div>
+
+          <div>
+            <h4>Employee Profile Picture</h4>
+
+            <p>PNG, JPG up to 5MB</p>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+
+        <button class="upload-btn">Upload Photo</button>
+      </div>
+
+      <!-- ===== ACTION BUTTONS ===== -->
+
+      <div class="action-buttons">
+        <button class="cancel-btn">Cancel</button>
+
+        <button class="save-btn">Save Employee</button>
+      </div>
+    </div>
+  </div>
+</div>
