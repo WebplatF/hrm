@@ -38,7 +38,7 @@ $shadow-hover: 0 4px 12px rgba(0,0,0,.10);
   // INPUT BACKGROUND CHANGE
   --bg-input: #f7f2ff;
   --pass-link:#7255D4;
-  
+  --Border-clr: #c7cdd4;
   --border: #ddd6fe;
   --border-focus: #8b5cf6;
   --card: #e3dbfa;
@@ -76,22 +76,19 @@ $shadow-hover: 0 4px 12px rgba(0,0,0,.10);
       #5b36ea 100%)
 
       /* ===== COLORS ===== create employee styling */
-
+  --bg-clr:#d6caff;
    --primary-color: #6d4aff;
   --primary-light: #f3efff;
-
   --text-dark: #1f1f1f;
   --text-muted: #6b7280;
-
-  --border-color: #e5e7eb;
-
-  --background-color: #efeffc;
+  --border-color: #d5d5d5dd;
+  --background-color: #e4e4fa53;
   --card-background: #ffffff;
-
-  --hover-background: #f5f3ff;
+  --hover-background: #eceaf8b9;
+  --hover-bg:#f3f4f6;
 
   /* ===== SHADOW ===== */
-
+  --box-shadow:0 0 0 3px rgba(109, 74, 255, 0.08);
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
 
   /* ===== BORDER RADIUS ===== */
