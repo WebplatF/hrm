@@ -62,14 +62,14 @@ selectedFile: File | null = null;  selectedFileName: string = '';
     {
       label: 'Full Name',
       type: 'text',
-      placeholder: 'Enter full name',
+      placeholder: 'e.g.Jonathan Doe ',
       model: 'fullName'
     },
 
     {
       label: 'Email Address',
       type: 'email',
-      placeholder: 'Enter email',
+      placeholder: 'j.doe@company.com',
       model: 'email'
     },
 
@@ -144,7 +144,21 @@ saveEmployee(){
 
   // RESET EVERYTHING
 
-  this.employeeForm.reset();
+  this.employeeForm.reset({
+     fullName: '',
+
+  email: '',
+
+  employeeId: '',
+
+  department: '',
+
+  desigination: '',
+
+  joinDate: '',
+
+  profileImg: ''
+  })
 
   this.previewUrl = null;
 
@@ -156,9 +170,24 @@ saveEmployee(){
 
   resetForm() {
 
-  this.employeeForm.reset();
+  this.employeeForm.reset({
+     fullName: '',
+
+  email: '',
+
+  employeeId: '',
+
+  department: '',
+
+  desigination: '',
+
+  joinDate: '',
+
+  profileImg: ''
+  })
   this.previewUrl = null;
 this.selectedFile = null;
+this.imageError = false;
 }
 
   
