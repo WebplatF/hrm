@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { routes } from '../../app.routes';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
 })
 
 export class Sidebar {
@@ -24,13 +25,13 @@ export class Sidebar {
     {
       name: 'Dashboard',
       icon: 'bi bi-columns-gap',
-      route: '/dashboard',
+      route: '/main/dashboard',
     },
 
     {
       name: 'Employee Management',
       icon: 'bi bi-people',
-      route: '/employees',
+      route: '/main/employees',
     },
 
     {
@@ -48,11 +49,9 @@ export class Sidebar {
     {
       name: 'Leave Management',
       icon:'bi bi-calendar4-week',
-      route:'/leaves'
+      route:'/main/leaves'
     },
     
-
-
     {
       name: 'Holiday Management',
       icon: 'bi bi-calendar4',

@@ -1,1 +1,44 @@
-<p>tablebody works!</p>
+<div class="table_card">
+  <div class="table_header">
+    <h2 class="table_title">{{ tableTitle }}</h2>
+    <div class="table_actions" *ngIf="showActions">
+      <button class="action_btn">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3">
+          <path d="M378.26-247.98v-82.76h203.48v82.76H378.26ZM232.83-438.74v-82.76h494.1v82.76h-494.1ZM135.87-629.5v-82.76h688.26v82.76H135.87Z"/>
+        </svg> Filter
+      </button>
+      <button class="action_btn">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3">
+          <path d="M480-338.87 276.52-542.35l58.89-58.41L438.5-497.44v-326.69h83v326.69l103.09-103.32 58.89 58.41L480-338.87Zm-213.41 155q-34.5 0-58.61-24.26t-24.11-58.74v-72h83v72h426.26v-72h83v72q0 34.48-24.27 58.74-24.27 24.26-58.77 24.26h-426.5Z"/>
+        </svg> Export
+      </button>
+    </div>
+  </div>
+  <div class="table_wrap">
+    <table class="table">
+      <thead>
+        <tr class="table_head_row">
+          <th *ngFor="let col of columns">{{ col.label }}</th>
+          <th class="col_actions">ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody app-list
+         [columns]="columns"
+         [data]="data"
+          [mode]="mode">
+         </tbody>
+    </table>
+  </div>
+  <div class="table_footer">
+    <span class="table_count">Showing 1 to 4 of 10 employees</span>
+    <div class="pagination">
+      <button class="page_btn nav_btn"><i class="bi bi-chevron-left"></i></button>
+      <button class="page_btn active">1</button>
+      <button class="page_btn">2</button>
+      <button class="page_btn">3</button>
+      <span class="page_dots">...</span>
+      <button class="page_btn">10</button>
+      <button class="page_btn nav_btn"><i class="bi bi-chevron-right"></i></button>
+    </div>
+  </div>
+</div>

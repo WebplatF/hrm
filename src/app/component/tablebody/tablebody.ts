@@ -1,9 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { List } from '../list/list';
+
+export interface TableColumn {
+  key: string;
+  label: string;
+  type: 'avatar' | 'text' | 'date' | 'toggle' | 'status-action';
+}
 
 @Component({
   selector: 'app-tablebody',
-  imports: [],
+  imports: [CommonModule, List],
   templateUrl: './tablebody.html',
-  styleUrl: './tablebody.scss',
+  styleUrls: ['./tablebody.scss'],
 })
-export class Tablebody {}
+export class Tablebody {
+  @Input() tableTitle: string = 'Employee Directory';
+  @Input() columns: TableColumn[] = [];
+  @Input() data: any[] = [];
+  @Input() mode: 'employee' | 'leave' = 'employee';
+  @Input() showActions: boolean = true;
+}
