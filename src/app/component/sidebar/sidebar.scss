@@ -1,22 +1,23 @@
 // ── Variables ──────────────────────────────
-$purple:       #6E2CF3;
+$purple: #6e2cf3;
 $purple-light: #f3efff;
-$text-dark:    #111827;
-$text-muted:   #6b7280;
-$border:       #e9e9ec;
-$white:        #ffffff;
-$hover-bg:     #f5f5f7;
-$breakpoint:   768px;
- 
+$text-dark: #111827;
+$text-muted: #6b7280;
+$border: #e9e9ec;
+$white: #ffffff;
+$hover-bg: #f5f5f7;
+$breakpoint: 768px;
+
 // ── Container ──────────────────────────────
 .sidebar_container {
   width: 230px;
   height: 100%;
+  // flex-shrink: 0;
   background-color: $white;
   display: flex;
   flex-direction: column;
   // border-right: 1.5px solid $border;
-  position:relative;
+  position: relative;
   border-right: 1px solid $border;
   transition: transform 0.3s ease;
 }
@@ -77,11 +78,13 @@ $breakpoint:   768px;
   text-decoration: none;
   color: $text-muted;
   position: relative;
-  transition: background-color 0.18s ease, color 0.18s ease;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
   user-select: none;
-.menu-icon i{
+  .menu-icon i {
     font-size: 14px;
-}
+  }
   // ─ Hover (inactive)
   &:hover:not(.active) {
     background-color: $hover-bg;
@@ -89,7 +92,6 @@ $breakpoint:   768px;
 
     .menu-icon i {
       color: $text-dark;
-    
     }
   }
 
@@ -159,35 +161,34 @@ $breakpoint:   768px;
     font-weight: 500;
     cursor: pointer;
     text-decoration: none;
-    transition: background-color 0.18s ease, color 0.18s ease;
+    transition:
+      background-color 0.18s ease,
+      color 0.18s ease;
     position: relative;
     i {
       font-size: 16px;
     }
 
     //Hover
-    &:hover:not(.active){
+    &:hover:not(.active) {
       background-color: $hover-bg;
       color: $text-dark;
 
-      i{
+      i {
         color: $text-dark;
       }
     }
     //Active
-    &.active{
+    &.active {
       background-color: $purple-light;
       color: $purple;
 
-      i{
+      i {
         color: $purple;
       }
     }
-    
-  
   }
-} 
-
+}
 
 // ── Close Button (hidden on desktop) ───────
 .close-btn {
@@ -260,25 +261,23 @@ $breakpoint:   768px;
 // / ═══════════════════════════════════════════
 // RESPONSIVE — Mobile (max 768px)
 // ═══════════════════════════════════════════
-@media (max-width:$breakpoint) {
-
+@media (max-width: $breakpoint) {
   // Hide sidebar off-screen by default
   .sidebar_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    height: 100vh;
+    transform: translateX(-100%);
+    box-shadow: none;
+    background-color: $white;
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  height: 100vh;
-  transform: translateX(-100%);
-  box-shadow: none;
-  background-color: $white;
-
-  &.open {
-    transform: translateX(0);
-    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+    &.open {
+      transform: translateX(0);
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+    }
   }
-}
 
   // Show hamburger on mobile
   .hamburger-btn {
@@ -310,4 +309,4 @@ $breakpoint:   768px;
   .menu-text {
     font-size: 11.5px;
   }
-} 
+}

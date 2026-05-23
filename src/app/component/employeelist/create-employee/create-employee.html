@@ -1,0 +1,253 @@
+<div class="employee_main_container">
+  <!-- ===== PAGE HEADER ===== -->
+
+  <div class="page_Header">
+    <button class="back_btn">
+      <i class="bi bi-arrow-left-short"></i>
+    </button>
+
+    <h2 class="page_title">Add New Employee</h2>
+  </div>
+
+  <!-- ===== FORM CARD ===== -->
+
+  <div class="employee_card">
+    <!-- ===== CARD HEADER ===== -->
+
+    <div class="card_header">
+      <h3 class="card_title">Employee Information</h3>
+
+      <p class="card_description">
+        Fill in the primary details to register a new member to the
+        organization.
+      </p>
+    </div>
+
+    <!-- ===== CARD BODY ===== -->
+
+    <form [formGroup]="employeeForm">
+
+      <div class="card_body">
+
+        <!-- ===== FORM GRID ===== -->
+
+        <div class="form_grid">
+
+          <div class="form_group" *ngFor="let field of employeeFields">
+
+            <!-- LABEL -->
+
+            <label>
+              {{ field.label }}
+            </label>
+
+            <!-- ===== NORMAL INPUT ===== -->
+
+            <input
+              *ngIf="field.type !== 'select' && field.type !== 'date'"
+              [type]="field.type"
+              [formControlName]="field.model"
+              [placeholder]="field.placeholder"
+            />
+
+            <!-- ===== DATE INPUT ===== -->
+
+            <div
+              class="date_input_wrapper"
+              *ngIf="field.type === 'date'"
+            >
+
+              <input
+                type="date"
+                [formControlName]="field.model"
+              />
+
+              <i class="bi bi-calendar"></i>
+
+            </div>
+
+            <!-- ===== SELECT INPUT ===== -->
+
+            <select
+              *ngIf="field.type === 'select'"
+              [formControlName]="field.model"
+            >
+
+              <option value="">
+                Select Department
+              </option>
+
+              <option
+                [value]="option"
+                *ngFor="let option of field.options"
+              >
+                {{ option }}
+              </option>
+
+            </select>
+
+            <!-- ===== VALIDATION MESSAGE ===== -->
+
+            <small
+              class="error_text"
+              *ngIf="
+                employeeForm.get(field.model)?.invalid &&
+                employeeForm.get(field.model)?.touched
+              "
+            >
+
+              {{ field.label }} is required
+
+            </small>
+
+          </div>
+
+        </div>
+
+        <!-- ===== UPLOAD SECTION ===== -->
+
+        <div class="upload_section">
+
+          <!-- LEFT SIDE -->
+
+          <div class="upload_info">
+
+            <!-- IMAGE / ICON -->
+
+            <div class="upload_icon">
+
+              <!-- PREVIEW IMAGE -->
+
+              <img
+                *ngIf="previewUrl"
+                [src]="previewUrl"
+                alt="profile"
+                class="preview_image"
+                (click)="showPreview = true"
+              />
+
+              <!-- CAMERA ICON -->
+
+              <i
+                class="bi bi-camera"
+                *ngIf="!previewUrl"
+              ></i>
+
+            </div>
+
+            <!-- TEXT -->
+
+            <div>
+
+              <h4>
+                {{
+                  previewUrl
+                    ? selectedFileName
+                    : 'Employee Profile Picture'
+                }}
+              </h4>
+
+              <p>
+                {{
+                  previewUrl
+                    ? selectedFileSize
+                    : 'PNG, JPG up to 5MB'
+                }}
+              </p>
+
+              <!-- IMAGE VALIDATION -->
+
+              <small
+                class="error_text"
+                *ngIf="imageError"
+              >
+
+                Profile Image is required
+
+              </small>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT SIDE -->
+
+          <button
+            class="upload-btn"
+            type="button"
+            (click)="fileInput.click()"
+          >
+
+            {{
+              previewUrl
+                ? 'Replace Photo'
+                : 'Upload Photo'
+            }}
+
+          </button>
+
+          <!-- HIDDEN FILE INPUT -->
+
+          <input
+            type="file"
+            #fileInput
+            hidden
+            accept="image/*"
+            (change)="onFileSelected($event)"
+          />
+
+        </div>
+
+        <!-- ===== IMAGE PREVIEW MODAL ===== -->
+
+        <div
+          class="image_preview_modal"
+          *ngIf="showPreview"
+          (click)="showPreview = false"
+        >
+
+          <img
+            [src]="previewUrl"
+            *ngIf="previewUrl"
+            alt="profile"
+            class="full_preview_image"
+          />
+
+        </div>
+
+        <!-- ===== ACTION BUTTONS ===== -->
+
+        <div class="action-buttons">
+
+          <!-- CANCEL -->
+
+          <button
+            class="cancel-btn"
+            type="button"
+            (click)="resetForm()"
+          >
+
+            Cancel
+
+          </button>
+
+          <!-- SAVE -->
+
+          <button
+            class="save-btn"
+            type="submit"
+            (click)="saveEmployee()"
+          >
+
+            Save Employee
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>

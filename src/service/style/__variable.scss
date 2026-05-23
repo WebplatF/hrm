@@ -42,6 +42,7 @@ $shadow-hover: 0 4px 12px rgba(0,0,0,.10);
   --bg-input: #f7f2ff;
   --bg-inputt:#f3f0f7;
   --pass-link:#7255D4;
+  --Border-clr: #c7cdd4;
   --table-head:#F1F3FF;
   --border: #ddd6fe;
   --border-focus: #8b5cf6;
@@ -84,6 +85,38 @@ $shadow-hover: 0 4px 12px rgba(0,0,0,.10);
       #7c5cff 0%,
       #5b36ea 100%)
 
+      /* ===== COLORS ===== create employee styling */
+  --bg-clr:#d6caff;
+   --primary-color: #6d4aff;
+  --primary-light: #f3efff;
+  --text-dark: #1f1f1f;
+  --text-muted: #6b7280;
+  --border-color: #d5d5d5dd;
+  --background-color: #e4e4fa53;
+  --card-background: #ffffff;
+  --hover-background: #eceaf8b9;
+  --hover-bg:#f3f4f6;
+
+  /* ===== SHADOW ===== */
+  --box-shadow:0 0 0 3px rgba(109, 74, 255, 0.08);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+
+  /* ===== BORDER RADIUS ===== */
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* ===== SPACING ===== */
+
+  --space-xs: 6px;
+  --space-sm: 12px;
+  --space-md: 20px;
+  --space-lg: 32px;
+
+  /* ===== TRANSITION ===== */
+
+  --transition: all 0.18s ease;
       
 
 }
