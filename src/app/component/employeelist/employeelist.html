@@ -5,13 +5,13 @@
       <p class="header_subtitle">{{ subtitle() }}</p>
     </div>
     @if (showBtn()) {
-      <button class="header_btn">
+      <button class="header_btn" (click)="createEmployee()">
         <span class="btn_icon">+</span>
         Add Employee
       </button>
     }
   </div>
- <app-tablebody
+  <app-tablebody
     tableTitle="Employee Directory"
     [columns]="columns"
     [data]="Employee"

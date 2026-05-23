@@ -1,37 +1,37 @@
-
-$color-bg:           #F5F7FA;
-$color-surface:      #FFFFFF;
-$color-border:       #E8ECF0;
-$color-text-primary: #1A1D23;
-$color-text-secondary: #6B7280;
-$color-accent:       #4A90D9;
-$color-accent-light: #EBF4FF;
-$color-pending:      #F59E0B;
-$color-pending-bg:   #FFFBEB;
-$color-completed:    #10B981;
-$color-completed-bg: #ECFDF5;
-$color-rejected:     #EF4444;
-$color-rejected-bg:  #FEF2F2;
-$radius-sm:  6px;
-$radius-md:  10px;
-$radius-lg:  14px;
+$color-bg: #f5f7fa;
+$color-surface: #ffffff;
+$color-border: #e8ecf0;
+$color-text-primary: #1a1d23;
+$color-text-secondary: #6b7280;
+$color-accent: #4a90d9;
+$color-accent-light: #ebf4ff;
+$color-pending: #f59e0b;
+$color-pending-bg: #fffbeb;
+$color-completed: #10b981;
+$color-completed-bg: #ecfdf5;
+$color-rejected: #ef4444;
+$color-rejected-bg: #fef2f2;
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 14px;
 $table-border: #e8eaf0;
 $table-hover: #f8fafc;
-$shadow-card: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-$shadow-hover: 0 4px 12px rgba(0,0,0,.10);
-
+$shadow-card:
+  0 1px 3px rgba(0, 0, 0, 0.06),
+  0 1px 2px rgba(0, 0, 0, 0.04);
+$shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
 
 :root {
-  --bg-page: #F9F2FE !important;
+  --bg-page: #f9f2fe !important;
   --bg-deep: #0d1117;
   --bg-sidebar: #0d1b2e;
   // --bg-hover: #1a2336;
-  --bg-box:#ffffff;
-  --check-text:#2f3239;   
-  --primary: #673DE6;
+  --bg-box: #ffffff;
+  --check-text: #2f3239;
+  --primary: #673de6;
   --primary-hover: #5a36e8;
-  --purple-light:#ded5f7;
-  --purple:#6E2CF3;
+  --purple-light: #ded5f7;
+  --purple: #6e2cf3;
   --text: #111827;
   --text-muted: #343435;
   --placeholder: #ffffff;
@@ -46,50 +46,66 @@ $shadow-hover: 0 4px 12px rgba(0,0,0,.10);
   --border: #ddd6fe;
   --border-focus: #8b5cf6;
   --card: #e3dbfa;
-   --label: #050709;
+  --label: #050709;
   --error: #ef4444;
-  --input-color:#4b5563;
-  --place-holder:#cdcdd8;
-  --hover:#c4b5fd;
-  --white:#ffffff;
-  --eye-color:#9ca3af;
-  --footer:#94a3b8;
- --font-family: 'Inter', sans-serif;
- --radius-lg :8px;
- --avatar-text:#e8e0fd;
-  --avatar-bg:#6c3ff5;
-  --accept-back:#e8f5e9;
-  --accept-color:#2e7d32;
-  --reject-back:#fdecea;
-  --reject-color:#c62828;
-  --radius-full:9999px;
-  
+  --input-color: #4b5563;
+  --place-holder: #cdcdd8;
+  --hover: #c4b5fd;
+  --white: #ffffff;
+  --eye-color: #9ca3af;
+  --footer: #94a3b8;
+  --font-family: 'Inter', sans-serif;
+  --avatar-text: #e8e0fd;
+  --avatar-bg: #6c3ff5;
+  --accept-back: #e8f5e9;
+  --accept-color: #2e7d32;
+  --reject-back: #fdecea;
+  --reject-color: #c62828;
+  --radius-full: 9999px;
+  --border-lg: 8px;
 
+  //---------------------------------- Login Page Style ---------------------------------------------
+  --shadow-card: 0 8px 30px rgba(108, 71, 255, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
 
-//---------------------------------- Login Page Style ---------------------------------------------
-  --shadow-card:
-    0 8px 30px rgba(108, 71, 255, 0.06),
-    0 2px 6px rgba(0, 0, 0, 0.03);
+  --shadow-focus: 0 0 0 4px rgba(108, 71, 255, 0.1);
 
-  --shadow-focus:
-    0 0 0 4px rgba(108, 71, 255, 0.10);
-
-  --shadow-btn:
-    0 8px 18px rgba(108, 71, 255, 0.24);
+  --shadow-btn: 0 8px 18px rgba(108, 71, 255, 0.24);
 
   --font: 'Inter', sans-serif;
 
   --ease: 0.25s ease;
-  --button-gardian:linear-gradient(135deg,
-      #7c5cff 0%,
-      #5b36ea 100%)
+  --button-gardian: linear-gradient(135deg, #7c5cff 0%, #5b36ea 100%) !important;
 
-      
+  /* ===== COLORS ===== create employee styling */
+  --bg-clr: #d6caff;
+  --primary-color: #6d4aff;
+  --primary-light: #f3efff;
+  --text-dark: #1f1f1f;
+  --text-muted: #6b7280;
+  --border-color: #d5d5d5dd;
+  --background-color: #e4e4fa53;
+  --card-background: #ffffff;
+  --hover-background: #eceaf8b9;
+  --hover-bg: #f3f4f6;
 
+  /* ===== SHADOW ===== */
+  --box-shadow: 0 0 0 3px rgba(109, 74, 255, 0.08);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  /* ===== BORDER RADIUS ===== */
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* ===== SPACING ===== */
+
+  --space-xs: 6px;
+  --space-sm: 12px;
+  --space-md: 20px;
+  --space-lg: 32px;
+
+  /* ===== TRANSITION ===== */
+
+  --transition: all 0.18s ease;
 }
-
-
-
-
-
-
