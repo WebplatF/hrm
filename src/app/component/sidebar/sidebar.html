@@ -28,11 +28,14 @@
   <!-- ─── Nav Menu ─── -->
   <ul class="sidemenu-container">
     <li class="sidemenu-item" *ngFor="let item of subMenus">
-      <a
-        class="sidebar_link"
-        [class.active]="activeMenu === item.name"
-        (click)="setActive(item.name)"
-      >
+      
+ <a
+  class="sidebar_link"
+  [routerLink]="item.route"
+  routerLinkActive="active"
+  [class.active]="activeMenu === item.name"
+  (click)="setActive(item.name)"
+>
         <!-- Icon -->
         <span class="menu-icon">
           <i [class]="item.icon"></i>

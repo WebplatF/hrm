@@ -16,10 +16,6 @@
   justify-content: space-between;
   padding: 28px 32px;
   border-radius: var(--radius-lg);
-
-    @media (max-width: 480px) {
-    padding: 20px 16px;
-  }
 }
 
 .header_info {
@@ -29,15 +25,15 @@
 }
 
 .header_title {
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 600;
   color: var(--text);
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   margin-top: 20px;
 }
 
 .header_subtitle {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 100;
   color: var(--input-color);
   letter-spacing: 1px;
@@ -51,28 +47,79 @@
   color: var(--white);
   border: none;
   border-radius: var(--radius-lg);
-  padding: 13px 22px;
+  padding: 12px 20px;
   font-family: var(--font-family);
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 500;
   cursor: pointer;
   transition: background-color var(--ease), transform var(--ease), box-shadow var(--ease);
   white-space: nowrap;
-//   box-shadow: var(--shadow-btn);
+  transition:
+    transform var(--ease),
+    box-shadow var(--ease);
+
+  &:hover {
+    transform: translateY(-2px);
+  }  
 
   &:active {
     transform: translateY(0);
     box-shadow: none;
   }
 
-  @media (max-width: 360px) {
-    padding: 10px 14px;
-    font-size: 13px;
-  }
 }
 
 .btn_icon {
   font-size: 20px;
   font-weight: 200;
   line-height: 1;
+}
+
+// ── Responsive ──
+
+@media (max-width: 1024px) {
+  .table_card {
+    margin: 10px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .employeelist {
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  .table_card {
+    margin: 10px 12px;
+    border-radius: 12px;
+  }
+
+  .header {
+    padding: 16px 14px;
+    margin-top: 24px;
+
+  }
+
+  .header_title {
+    font-size: 20px;
+  }
+
+  .header_subtitle {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .header_btn {
+    width: 100%;
+    justify-content: center;
+  }
 }

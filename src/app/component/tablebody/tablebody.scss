@@ -2,13 +2,14 @@
 .table_card {
   background: var(--bg-box);
   border-radius: 16px;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-box);
   overflow: hidden;
   margin: 10px 32px;
 }
 .table {
   width: 100%;
-  table-layout: fixed;
+  // table-layout: fixed;  
+  
 }
 
 .table_header {
@@ -16,7 +17,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 24px;
-  border-bottom: 1px solid var(--border);
+  // border-bottom: 1px solid var(--place-holder);
 }
 
 .table_title {
@@ -31,19 +32,29 @@
   gap: 10px;
 }
 
+// .table_header.no_actions {
+//   justify-content: flex-start;
+//   padding: 24px 28px;
+// }
 .action_btn {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 500;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 400;
   color: var(--text);
   background: var(--bg-box);
-  border: 1px solid var(--border);
+  border: 1px solid var(--place-holder);
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: border-color var(--ease), background var(--ease);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
 
   &:hover {
     border-color: var(--primary);
@@ -62,6 +73,10 @@
   border-collapse: collapse;
 }
 
+// .table_head_row{
+//   background-color: var(--white);
+// }
+
 .table_head_row th {
   padding: 16px 24px;
   font-size: 12px;
@@ -69,16 +84,26 @@
   // letter-spacing: 0.3px;
   color: var(--input-color);
   text-align: left;
-  background: var(--bg-page);
+  background: var(--table-head);
   text-transform: uppercase;
+
 }
 
-.col_sno {
-  width: 6%;
+.table_head_row th:first-child{
+  padding-left: 60px;
 }
+
+// .table_head_row th:nth-child(4){
+//   padding-left: 40px;
+// }
+// .col_sno {
+//   width: 6%;
+// }
 
 .col_name {
   width: 26%;
+ 
+  
 }
 
 .col_email {
@@ -93,10 +118,13 @@
   width: 16%;
 }
 
-.col_edit {
+// .col_edit {
+//   width: 14%;
+// }
+
+.col_actions {
   width: 14%;
 }
-
 tbody tr td,
 thead tr th {
   box-sizing: border-box;
@@ -116,14 +144,13 @@ tbody tr {
   }
 }
 
-
 /* ── Pagination ── */
 .table_footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px 24px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--place-holder);
 }
 
 .table_count {
@@ -150,8 +177,9 @@ tbody tr {
   transition: background var(--ease), color var(--ease), border-color var(--ease);
 
   &:hover {
+    background: var(--primary);
+    color: var(--white);
     border-color: var(--primary);
-    color: var(--primary);
   }
 
   &.active {
@@ -167,7 +195,7 @@ tbody tr {
   padding-bottom: 5px;
   border: 1px solid #e5e7eb;
   border-radius: var(--radius-lg);
-  background: #fff;
+  background: var(--white);
   color: var(--text-muted);
   font-size: 13px;
   display: flex;
@@ -176,10 +204,10 @@ tbody tr {
 }
 
 // ── Tablebody Responsive ──
-
 @media (max-width: 768px) {
   .table_card {
-    margin: 10px 16px;
+    margin: 10px auto; // center align
+    width: calc(100% - 24px); // sides la gap
     border-radius: 12px;
   }
 
@@ -187,10 +215,11 @@ tbody tr {
     padding: 14px 16px;
     flex-wrap: wrap;
     gap: 12px;
+
   }
 
   .table_head_row th {
-    padding: 12px 16px;
+    padding: 12px 12px;
   }
 
   .col_date,
@@ -198,10 +227,9 @@ tbody tr {
     display: none;
   }
 
-  .col_name   { width: 35%; }
-  .col_email  { width: 30%; }
-  .col_status { width: 20%; }
-  .col_edit   { width: 15%; }
+  .col_name   { width: 40%; }
+  .col_status { width: 35%; }
+  .col_edit   { width: 25%; }
 
   .table_footer {
     padding: 12px 16px;
@@ -213,36 +241,44 @@ tbody tr {
 @media (max-width: 560px) {
   .col_email { display: none; }
 
-  .col_name   { width: 50%; }
-  .col_status { width: 30%; }
-  .col_edit   { width: 20%; }
+  .col_name   { width: 55%; }
+  .col_status { width: 28%; }
+  .col_edit   { width: 17%; }
 }
+
+// @media (max-width: 480px) {
+//   .table_card {
+//     width: calc(100% - 16px);
+//     margin: 8px auto;
+//   }
+
+//   .table_head_row th {
+//     padding: 10px 10px;
+//     font-size: 10px;
+    
+//   }
+
+// }
 
 @media (max-width: 480px) {
   .table_card {
-    margin: 10px 12px;
+    width: calc(100% - 16px);
+    margin: 8px auto;
+  }
+
+  .table_head_row th {
+    padding: 10px 10px;
+    font-size: 10px;
   }
 
   .table_header {
-    padding: 12px 14px;
-  }
-
-  .action_btn span {
-    display: none;
-  }
-
-  .table_footer {
     flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-@media (max-width: 400px) {
-  .page_dots {
-    display: none;
+    align-items: center;
+    gap: 12px;
   }
 
-  .page_btn:not(.active):not(.nav_btn) {
-    display: none;
+  .table_actions {
+    width: 100%;
+    justify-content: center;
   }
 }

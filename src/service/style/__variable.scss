@@ -20,6 +20,7 @@ $table-hover: #f8fafc;
 $shadow-card: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
 $shadow-hover: 0 4px 12px rgba(0,0,0,.10);
 
+
 :root {
   --bg-page: #F9F2FE !important;
   --bg-deep: #0d1117;
@@ -29,6 +30,8 @@ $shadow-hover: 0 4px 12px rgba(0,0,0,.10);
   --check-text:#2f3239;   
   --primary: #673DE6;
   --primary-hover: #5a36e8;
+  --purple-light:#ded5f7;
+  --purple:#6E2CF3;
   --text: #111827;
   --text-muted: #343435;
   --placeholder: #ffffff;
@@ -37,8 +40,9 @@ $shadow-hover: 0 4px 12px rgba(0,0,0,.10);
   --bg-card: rgba(255, 255, 255, 0.82);
   // INPUT BACKGROUND CHANGE
   --bg-input: #f7f2ff;
+  --bg-inputt:#f3f0f7;
   --pass-link:#7255D4;
-  
+  --table-head:#F1F3FF;
   --border: #ddd6fe;
   --border-focus: #8b5cf6;
   --card: #e3dbfa;
@@ -54,7 +58,12 @@ $shadow-hover: 0 4px 12px rgba(0,0,0,.10);
  --radius-lg :8px;
  --avatar-text:#e8e0fd;
   --avatar-bg:#6c3ff5;
+  --accept-back:#e8f5e9;
+  --accept-color:#2e7d32;
+  --reject-back:#fdecea;
+  --reject-color:#c62828;
   --radius-full:9999px;
+  
 
 
 //---------------------------------- Login Page Style ---------------------------------------------
@@ -74,6 +83,8 @@ $shadow-hover: 0 4px 12px rgba(0,0,0,.10);
   --button-gardian:linear-gradient(135deg,
       #7c5cff 0%,
       #5b36ea 100%)
+
+      
 
 }
 

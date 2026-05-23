@@ -1,61 +1,88 @@
-<ng-container *ngFor="let emp of employees">
-  <tr class="emp_row">
+<!-- Employee mode -->
+<ng-container *ngIf="!isLeaveMode">
+  <tr class="emp_row" *ngFor="let emp of data">
+    <td *ngFor="let col of columns">
 
-    <!-- S.NO -->
-    <td class="col_sno">
-      <span class="sno_text">{{ formatSno(emp.sno) }}</span>
-    </td>
-
-    <!-- NAME + AVATAR -->
-    <td class="col_name">
-      <div class="name_cell">
-        <div
-          class="avatar"
-          [style.background-color]="emp.avatarColor"
-          [style.color]="emp.avatarTextColor"
-        >
-          {{ getInitials(emp.name) }}
+      <ng-container *ngIf="col.type === 'avatar'">
+        <div class="name_cell">
+          <div class="avatar">{{ getInitials(emp.name) }}</div>
+          <div class="name_info">
+            <span class="emp_name">{{ emp.name }}</span>
+            <span class="emp_role">{{ emp.role }}</span>
+          </div>
         </div>
-        <div class="name_info">
-          <span class="emp_name">{{ emp.name }}</span>
-          <span class="emp_role">{{ emp.role }}</span>
+      </ng-container>
+
+      <ng-container *ngIf="col.type === 'text'">
+        <span class="emp_email">{{ emp[col.key] }}</span>
+      </ng-container>
+
+      <ng-container *ngIf="col.type === 'date'">
+        <span class="emp_date">{{ emp[col.key] }}</span>
+      </ng-container>
+
+      <ng-container *ngIf="col.type === 'toggle'">
+        <div class="status_cell">
+          <label class="toggle_switch">
+            <input type="checkbox" [checked]="emp[col.key]" (change)="onToggleStatus(emp)" />
+            <span class="toggle_slider"></span>
+          </label>
         </div>
-      </div>
-    </td>
+      </ng-container>
 
-    <!-- EMAIL -->
-    <td class="col_email">
-      <span class="emp_email">{{ emp.email }}</span>
     </td>
-
-    <!-- DATE OF JOIN -->
-    <td class="col_date">
-      <span class="emp_date">{{ emp.dateOfJoin }}</span>
-    </td>
-
-    <!-- STATUS TOGGLE -->
-    <td class="col_status">
-      <div class="status_cell">
-        <label class="toggle_switch">
-          <input
-            type="checkbox"
-            [checked]="emp.isActive"
-            (change)="onToggleStatus(emp)"
-          />
-          <span class="toggle_slider"></span>
-        </label>
-        <span class="status_label" [class.active]="emp.isActive" [class.inactive]="!emp.isActive">
-          {{ emp.isActive ? 'Active' : 'Inactive' }}
-        </span>
-      </div>
-    </td>
-
-    <!-- ACTION — Edit Icon -->
     <td class="col_edit">
-      <button class="edit_btn" (click)="onEdit(emp)" title="Edit Employee">
+      <button class="action_btn view" title="Edit Employee">
         <i class="bi bi-pencil-square"></i>
       </button>
     </td>
+  </tr>
+</ng-container>
 
+<!-- Leave mode -->
+<ng-container *ngIf="isLeaveMode">
+  <tr class="emp_row" *ngFor="let row of data">
+    <td *ngFor="let col of columns">
+      
+      <ng-container *ngIf="col.type === 'avatar'">
+        <div class="name_cell">
+          <div class="avatar">{{ getInitials(row[col.key]) }}</div>
+          <div class="name_info">
+            <span class="emp_name">{{ row[col.key] }}</span>
+            <span class="emp_role">{{ row['employeeId'] }}</span>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- இது missing இருந்தது — add பண்ணுங்க -->
+      <ng-container *ngIf="col.type === 'text'">
+        <span class="emp_email">{{ row[col.key] }}</span>
+      </ng-container>
+
+      <ng-container *ngIf="col.type === 'date'">
+        <span class="emp_date">{{ row[col.key] }}</span>
+      </ng-container>
+
+      <ng-container *ngIf="col.type === 'status-action'">
+        <span class="status_badge"
+          [class.pending]="row['status'] === 'Pending'"
+          [class.accepted]="row['status'] === 'Accepted'"
+          [class.rejected]="row['status'] === 'Rejected'">
+          {{ row['status'] }}
+        </span>
+      </ng-container>
+
+    </td>
+    <td class="col_edit">
+      <button class="action_btn view" title="View">
+        <i class="bi bi-eye"></i>
+      </button>
+      <button class="action_btn accept" title="Accept">
+        <i class="bi bi-check-lg"></i>
+      </button>
+      <button class="action_btn reject" title="Reject">
+        <i class="bi bi-x"></i>
+      </button>
+    </td>
   </tr>
 </ng-container>
