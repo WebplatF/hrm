@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 import {
   FormBuilder,
@@ -7,6 +8,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-employee',
@@ -28,7 +30,7 @@ selectedFileName: string = ''; //Stores uploaded file name. ex.(myphoto).png
 
   //  CONSTRUCTOR
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private location:Location) {
 
   this.employeeForm = this.fb.group({
 
@@ -214,6 +216,9 @@ this.imageError = false;
 
   }
 
+}
+goBack(){
+  this.location.back();
 }
     
   // removeImage(){
