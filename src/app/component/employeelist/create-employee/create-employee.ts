@@ -18,12 +18,13 @@ import {
 
 export class CreateEmployee {
 
-  previewUrl: string | ArrayBuffer | null =null;
-  showPreview = false;
-  employeeForm!: FormGroup;
-selectedFile: File | null = null;  selectedFileName: string = '';
-  selectedFileSize: string = '';
-  imageError:boolean = false;
+  previewUrl: string | ArrayBuffer | null =null; //Stores image preview URL.
+  showPreview = false; //Controls image preview modal open/close.
+  employeeForm!: FormGroup; //Stores entire form. etc. fullname,
+selectedFile: File | null = null;   //Stores uploaded image file.
+selectedFileName: string = ''; //Stores uploaded file name. ex.(myphoto).png
+  selectedFileSize: string = ''; //Stores image size. ex: 2.5MB
+  imageError:boolean = false; //Used for image validation.
 
   //  CONSTRUCTOR
 
