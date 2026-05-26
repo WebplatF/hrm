@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-daily-attendance',
   imports: [CommonModule, FormsModule, Tablebody],
   templateUrl: './daily-attendance.html',
-  styleUrl: './daily-attendance.scss',
+  styleUrls: ['./daily-attendance.scss'],
 })
 export class DailyAttendance {
   private router = inject(Router);
