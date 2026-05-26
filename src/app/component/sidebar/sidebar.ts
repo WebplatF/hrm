@@ -37,7 +37,7 @@ export class Sidebar {
     {
     name: 'Attendance Management',
     icon:"bi bi-journal-text",
-    route: '/attendance',
+    route: '/main/attendance',
    },
 
    {

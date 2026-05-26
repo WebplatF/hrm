@@ -19,13 +19,17 @@
       <thead>
         <tr class="table_head_row">
           <th *ngFor="let col of columns">{{ col.label }}</th>
-          <th class="col_actions">ACTIONS</th>
+          @if(showActionLabel){
+            <th class="col_actions">ACTIONS</th>
+          }
         </tr>
       </thead>
       <tbody app-list
          [columns]="columns"
          [data]="data"
-          [mode]="mode">
+          [mode]="mode"
+          [showActions]="false"
+          >
          </tbody>
     </table>
   </div>

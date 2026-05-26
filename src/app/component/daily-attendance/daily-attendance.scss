@@ -1,0 +1,293 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+.employeelist{
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  overflow-y: auto;
+
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 32px;
+  border-radius: var(--border-lg);
+}
+
+.header_info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.header_title {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+}
+
+.header_subtitle {
+  font-size: 12px;
+  font-weight: 100;
+  color: var(--input-color);
+  letter-spacing: 1px;
+}
+
+.header_btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--button-gardian);
+  color: var(--white);
+  border: none;
+  border-radius: var(--border-lg);
+  padding: 12px 20px;
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--ease), transform var(--ease), box-shadow var(--ease);
+  white-space: nowrap;
+  transition:
+    transform var(--ease),
+    box-shadow var(--ease);
+
+  &:hover {
+    transform: translateY(-2px);
+  }  
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+}
+
+.btn_icon {
+  font-size: 20px;
+  font-weight: 200;
+  line-height: 1;
+}
+.attendance_cards {
+  display: flex;
+  gap: 18px;
+  margin: 0 32px 24px;
+}
+
+.attendance_card {
+  flex: 1;
+  min-width: 220px;
+  height: 140px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  padding: 22px;
+  background: var(--white);
+  border-radius: 18px;
+  border: 1px solid #ECECEC;
+
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+  }
+}
+
+
+
+/* Card Title */
+.card_title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+
+  line-height: 18px;
+  height: 36px;
+
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+
+  word-break: break-word;
+}
+/* Bottom Section */
+.card_bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  
+
+  h2 {
+  font-size: 44px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+  line-height: 1;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+  }
+}
+
+/* Icon Box */
+.card_icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+}
+
+/* Present */
+.present .card_icon {
+  background: #EAFBF3;
+  color: #16A34A;
+}
+
+/* Absent */
+.absent .card_icon {
+  background: #FFF1F1;
+  color: #DC2626;
+}
+
+/* Permission */
+.permission .card_icon {
+  background: #FFF7E8;
+  color: #F59E0B;
+}
+
+/* Leave */
+.leave .card_icon {
+  background: #EEF2FF;
+  color: #4F46E5;
+}
+
+// :host ::ng-deep .emp_row td:nth-child(3)
+//  {
+//    display: inline-block;
+//   transform: translateX(10px);
+// }
+
+// :host ::ng-deep .emp_row td:nth-child(4){
+//   display: inline-block;
+//   transform: translateY(10px);
+// }
+:host ::ng-deep .emp_row td:nth-child(3) .emp_email {
+  display: inline-block;
+  transform: translateX(10px);
+}
+
+:host ::ng-deep .emp_row td:nth-child(4) .emp_email {
+  display: inline-block;
+  margin-left: 25px;
+}
+
+// :host ::ng-deep .emp_row td:nth-child(5) .emp_email {
+//   display: inline-block;
+//   margin-left: 15px;
+// }
+
+/* Tablet */
+@media (max-width: 992px) {
+  .attendance_cards {
+    flex-wrap: wrap;
+  }
+
+  .attendance_card {
+    flex: 1 1 calc(50% - 18px);
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .attendance_cards {
+    margin: 0 16px 20px;
+    flex-direction: column;
+  }
+
+  .attendance_card {
+    width: 100%;
+    min-width: 100%;
+    height: 120px;
+    padding: 18px;
+  }
+
+  .card_bottom h2 {
+    font-size: 34px;
+  }
+
+  .card_icon {
+    width: 46px;
+    height: 46px;
+    font-size: 18px;
+  }
+}
+@media (max-width: 1024px) {
+  .table_card {
+    margin: 10px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .employeelist {
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  .table_card {
+    margin: 10px 12px;
+    border-radius: 12px;
+  }
+
+  .header {
+    padding: 16px 14px;
+    margin-top: 24px;
+
+  }
+
+  .header_title {
+    font-size: 20px;
+  }
+
+  .header_subtitle {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .header_btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

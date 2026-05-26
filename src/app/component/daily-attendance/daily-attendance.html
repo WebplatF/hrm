@@ -1,0 +1,38 @@
+<div class="employeelist">
+  <div class="header">
+    <div class="header_info">
+      <h1 class="header_title">{{ title() }}</h1>
+      <p class="header_subtitle">{{ subtitle() }}</p>
+    </div>
+    @if (showBtn()) {
+      <button class="header_btn">
+        <span class="btn_icon"><i class="bi bi-file-earmark-arrow-down"></i></span>
+        Download Report
+      </button>
+    }
+  </div>
+<div class="attendance_cards">
+  @for (card of attendanceCards; track card) {
+    <div class="attendance_card" [ngClass]="card.class">
+
+      <p class="card_title">{{ card.title }}</p>
+
+      <div class="card_bottom">
+        <h2>{{ card.count }}</h2>
+        <div class="card_icon">
+          <i [class]="card.icon"></i>
+        </div>
+      </div>
+
+    </div>
+  }
+</div>
+<app-tablebody
+    tableTitle="Daily Attendance Directory"
+    [columns]="columns"
+    [data]="Employee"
+    mode="attendance"
+     [showActions]="false"
+    [showActionLabel]="false"
+  />
+</div>
