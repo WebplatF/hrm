@@ -43,7 +43,7 @@ export class Sidebar {
    {
       name: 'Permissions Management',
       icon: 'bi bi-calendar2-x',
-      route: '/permissions',
+      route: '/main/permission',
     },
 
     {

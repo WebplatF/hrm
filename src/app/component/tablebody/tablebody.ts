@@ -18,7 +18,7 @@ export class Tablebody {
   @Input() tableTitle: string = 'Employee Directory';
   @Input() columns: TableColumn[] = [];
   @Input() data: any[] = [];
-  @Input() mode: 'employee' | 'leave'|'attendance' = 'employee';
+  @Input() mode: 'employee' | 'leave'|'attendance' | 'permission'= 'employee';
   @Input() showActions: boolean = true;
   @Input() showActionLabel:boolean=false;
 
