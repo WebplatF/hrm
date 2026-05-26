@@ -5,6 +5,7 @@ import { Dashboard } from './component/dashboard/dashboard';
 import { Employeelist } from './component/employeelist/employeelist';
 import { LeaveList } from './component/leavelist/leavelist';
 import { CreateEmployee } from './component/employeelist/create-employee/create-employee';
+import { DailyAttendance } from './component/daily-attendance/daily-attendance';
 
 
 
@@ -19,6 +20,7 @@ export const routes: Routes = [
       { path: 'employees', component: Employeelist },
       {path:'employee/create',component:CreateEmployee},
       { path: 'leaves', component: LeaveList },
+      {path:'attendance',component:DailyAttendance}
       
     ]
   },
