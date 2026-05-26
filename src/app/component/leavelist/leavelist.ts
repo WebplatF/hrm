@@ -23,9 +23,9 @@ export class LeaveList {
 ];
 
 leaves = [
-  { name: 'Johnathan Doe', employeeId: 'EMP001', leaveType: 'Sick Leave',      date: '12 Jan 2024', status: 'Rejected' },
+  { name: 'Johnathan Doe', employeeId: 'EMP001', leaveType: 'Sick Leave',      date: '12 Jan 2024 - 15 Jan 2024', status: 'Rejected' },
   { name: 'Sarah Smith',   employeeId: 'EMP002', leaveType: 'Casual Leave',    date: '24 Feb 2024', status: 'Accepted' },
-  { name: 'Mark Jenkins',  employeeId: 'EMP003', leaveType: 'Earned Leave',    date: '15 Mar 2024', status: 'Pending'  },
+  { name: 'Mark Jenkins',  employeeId: 'EMP003', leaveType: 'Earned Leave',    date: '15 Mar 2024 - 28 Mar 2025', status: 'Pending'  },
   { name: 'Anita Lee',     employeeId: 'EMP004', leaveType: 'Sick Leave', date: '02 Apr 2024', status: 'Accepted' },
 ];
 }
