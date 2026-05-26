@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 28px 32px;
-  border-radius: var(--radius-lg);
+  border-radius: var(--border-lg);
 }
 
 .header_info {
@@ -46,7 +46,7 @@
   background: var(--button-gardian);
   color: var(--white);
   border: none;
-  border-radius: var(--radius-lg);
+  border-radius: var(--border-lg);
   padding: 12px 20px;
   font-family: var(--font-family);
   font-size: 15px;
