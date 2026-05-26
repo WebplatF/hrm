@@ -37,13 +37,13 @@ export class Sidebar {
     {
     name: 'Attendance Management',
     icon:"bi bi-journal-text",
-    route: '/attendance',
+    route: '/main/attendance',
    },
 
    {
       name: 'Permissions Management',
       icon: 'bi bi-calendar2-x',
-      route: '/permissions',
+      route: '/main/permission',
     },
 
     {

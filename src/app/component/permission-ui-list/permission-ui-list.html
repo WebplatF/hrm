@@ -1,0 +1,17 @@
+<div class="permissionlist">
+  <div class="header">
+    <div class="header_info">
+      <h1 class="header_title">Permission Management</h1>
+      <p class="header_subtitle">Track and manage employee permission requests.</p>
+    </div>
+  </div>
+
+<app-tablebody
+  tableTitle="Permission Directory"
+  [columns]="columns"
+  [data]="permissions"
+  mode="permission"
+  [showActions]="false"
+  [showActionLabel]="true"
+/>
+</div>
