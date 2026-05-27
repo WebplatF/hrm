@@ -1,0 +1,145 @@
+<div class="holiday_page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header_info">
+      <h1 class="header_title">Holiday Management</h1>
+      <p class="header_subtitle">Track and manage organizational holiday schedules.</p>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <select class="dropdown" [(ngModel)]="selectedYear" (ngModelChange)="onMonthChange()">
+        @for (y of years; track y) {
+        <option [value]="y">{{ y }}</option>
+        }
+      </select>
+
+      <select class="dropdown" [(ngModel)]="selectedMonth" (ngModelChange)="onMonthChange()">
+        @for (m of months; track m; let i = $index) {
+        <option [value]="i">{{ m }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content_wrapper">
+
+    <div class="calendar_section">
+      <div class="calendar_card">
+
+        <!-- Calendar Header -->
+        <div class="calendar_header">
+          <span class="calendar_month_title">{{ months[selectedMonth] }} {{ selectedYear }}</span>
+        </div>
+
+        <!-- Weekday Labels -->
+        <div class="weekday_row">
+          @for (day of weekDays; track day) {
+          <div class="weekday_label">{{ day }}</div>
+          }
+        </div>
+
+        <!-- Days Grid -->
+        <div class="days_grid">
+          @for (day of calendarDays; track $index) {
+          <div class="day_cell" [class.empty]="!day" [class.today]="day && isToday(day)"
+            [class.selected]="day && isSelected(day)" [class.holiday]="day && isHolidayDay(day)"
+            [class.selected_holiday]="day && isSelected(day) && isHolidayDay(day)" (click)="selectDate(day)">
+            @if (day) {
+            <span class="day_number">{{ day }}</span>
+            @if (isHolidayDay(day)) {
+            <span class="holiday_dot"></span>
+            }
+            }
+          </div>
+          }
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Gap (8%) — handled by CSS gap -->
+
+    <!-- Holiday List (25%) -->
+    <div class="holiday_section">
+      <div class="holiday_card">
+
+        <!-- No date selected — show month holidays -->
+        @if (!selectedDate) {
+        <div class="holiday_list_header">
+          <span class="holiday_list_title">{{ months[selectedMonth] }} Holidays</span>
+        </div>
+
+        @if (isFutureMonth || monthHolidays.length === 0) {
+        <div class="empty_state">
+          <span class="empty_icon"><i class="bi bi-calendar3"></i></span>
+          <span class="empty_text">No holidays scheduled</span>
+        </div>
+        } @else {
+        <div class="holiday_list">
+          @for (h of monthHolidays; track h.date) {
+          <div class="holiday_item">
+            <div class="holiday_dot_large" [class]="getTypeClass(h.type)"></div>
+            <div class="holiday_item_info">
+              <span class="holiday_item_name">{{ h.name }}</span>
+              <span class="holiday_item_date">{{ formatDate(h.date) }}</span>
+              <span class="holiday_item_type" [class]="getTypeClass(h.type)">{{ h.type }}</span>
+            </div>
+          </div>
+          }
+        </div>
+        }
+        }
+
+        <!-- Date selected — show that date info -->
+        @if (selectedDate) {
+        <div class="holiday_list_header">
+          <span class="holiday_list_title">{{ formatDate(selectedDate) }}</span>
+          <button class="clear_btn" (click)="selectedDate = null">✕</button>
+        </div>
+
+        @if (selectedHoliday) {
+        <div class="selected_holiday_card">
+          <div class="holiday_dot_large" [class]="getTypeClass(selectedHoliday.type)"></div>
+          <div class="selected_holiday_info">
+            <span class="selected_holiday_name">{{ selectedHoliday.name }}</span>
+            <span class="selected_holiday_date">{{ formatDate(selectedHoliday.date) }}</span>
+            <span class="holiday_item_type" [class]="getTypeClass(selectedHoliday.type)">
+              {{ selectedHoliday.type }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Other holidays this month -->
+        @if (monthHolidays.length > 1) {
+        <div class="other_holidays_label">Other holidays this month</div>
+        <div class="holiday_list">
+          @for (h of monthHolidays; track h.date) {
+          @if (h.date !== selectedDate) {
+          <div class="holiday_item">
+            <div class="holiday_dot_large" [class]="getTypeClass(h.type)"></div>
+            <div class="holiday_item_info">
+              <span class="holiday_item_name">{{ h.name }}</span>
+              <span class="holiday_item_date">{{ formatDate(h.date) }}</span>
+            </div>
+          </div>
+          }
+          }
+        </div>
+        }
+
+        } @else {
+        <div class="empty_state">
+          <span class="empty_icon"><i class="bi bi-calendar3"></i></span>
+          <span class="empty_text">No holiday on this date</span>
+        </div>
+        }
+        }
+
+      </div>
+    </div>
+
+  </div>
+</div>

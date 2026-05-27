@@ -55,7 +55,7 @@ export class Sidebar {
     {
       name: 'Holiday Management',
       icon: 'bi bi-calendar4',
-      route: '/holidays',
+      route: '/main/holiday',
     },
     
 
