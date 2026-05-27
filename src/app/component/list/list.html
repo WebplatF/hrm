@@ -92,8 +92,14 @@
     <div class="name_cell">
       <div class="avatar">{{ getInitials(row[col.key]) }}</div>
       <div class="name_info">
-        <span class="emp_name">{{ row[col.key] }}</span>
-        <span class="emp_role">{{ row['employeeId'] }}</span>
+
+        <span class="emp_name">
+          {{ row[col.key] }}
+        </span>
+        <span class="emp_role">
+          {{ row['employeeId'] }}
+        </span>
+
       </div>
     </div>
     }
