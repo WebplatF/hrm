@@ -1,13 +1,14 @@
 .holiday_page {
   min-height: 100vh;
   background-color: var(--bg-page);
+  overflow: hidden;
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 32px;
+  padding: 28px 32px 16px;
 }
 
 .header_info {
@@ -31,47 +32,19 @@
   letter-spacing: 1px;
 }
 
-.controls {
-  display: flex;
-  gap: 12px;
-}
-
-.dropdown {
-  padding: 10px 14px 10px 36px;
-  border-radius: var(--radius-md);
-  border: none;
-  background: var(--primary);
-  color: var(--white);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: left 12px center;
-
-  &:focus {
-    background-color: var(--primary-hover);
-  }
-
-  option {
-    background: var(--primary);
-    color: var(--white);
-  }
-}
-
 .content_wrapper {
   display: flex;
+  flex-direction: row;
   gap: 0;
   padding: 0 32px 32px;
   align-items: flex-start;
+  width: 100%;
 }
 
 .calendar_section {
   width: 67%;
-  padding-right: 4%;
+  padding-right: 24px;
+  flex-shrink: 0;
 }
 
 .calendar_card {
@@ -82,20 +55,65 @@
   border: 1px solid var(--border);
 }
 
-.calendar_header {
-  margin-bottom: 20px;
+.calendar_nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
 }
 
-.calendar_month_title {
-  font-size: 18px;
-  font-weight: 600;
+.nav_btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
   color: var(--text);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  line-height: 1;
+
+  &:hover {
+    background: var(--purple-light);
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+}
+
+.nav_selectors {
+  display: flex;
+  gap: 8px;
+}
+
+.nav_select {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: center;
+
+  &:focus {
+    border-color: var(--primary);
+  }
 }
 
 .weekday_row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
 }
 
 .weekday_label {
@@ -110,20 +128,22 @@
 .days_grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
 }
 
 .day_cell {
-  aspect-ratio: 1;
+  min-height: 80px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-sm);
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 8px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   cursor: pointer;
   position: relative;
   transition: var(--transition);
-  gap: 3px;
 
   &:hover:not(.empty) {
     background: var(--hover-background);
@@ -131,55 +151,57 @@
 
   &.empty {
     cursor: default;
+    background: var(--bg-page);
   }
 
   &.today {
-    border: 2px solid var(--primary);
-
     .day_number {
-      color: var(--primary);
-      font-weight: 700;
-    }
-  }
-
-  &.selected:not(.holiday) {
-    background: var(--purple-light);
-
-    .day_number {
-      color: var(--primary);
-      font-weight: 600;
-    }
-  }
-
-  &.selected_holiday {
-    background: var(--primary);
-
-    .day_number {
+      background: var(--primary);
       color: var(--white);
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 700;
     }
+  }
 
-    .holiday_dot {
-      background: var(--white);
+  &.selected,
+  &.selected_holiday {
+    background: var(--hover-background);
+
+    .day_number {
+      background: var(--primary);
+      color: var(--white);
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
     }
   }
 }
 
 .day_number {
   font-size: 13px;
+  font-weight: 500;
   color: var(--text);
-  line-height: 1;
-}
-
-.holiday_dot {
-  width: 5px;
-  height: 5px;
-  border-radius: var(--radius-full);
-  background: var(--primary);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .holiday_section {
   width: 25%;
+  flex-shrink: 0;
+  position: sticky;
+  top: 20px;
 }
 
 .holiday_card {
@@ -210,7 +232,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 16px;
   color: var(--input-color);
   padding: 2px 6px;
   border-radius: var(--radius-sm);
@@ -241,7 +263,7 @@
 
   &.national { background: var(--primary); }
   &.regional  { background: var(--purple); }
-  &.optional  { background: var(--hover); }
+  &.optional  { background: var(--hover);  }
 }
 
 .holiday_item_info {
@@ -321,6 +343,7 @@
 
   .empty_icon {
     font-size: 28px;
+    color: var(--input-color);
   }
 
   .empty_text {
@@ -330,15 +353,13 @@
   }
 }
 
-//media query
-
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
     padding: 16px 14px;
-    margin-top: 36px;
+    margin-top: 24px;
   }
 
   .content_wrapper {
@@ -349,16 +370,22 @@
   .calendar_section {
     width: 100%;
     padding-right: 0;
+    flex-shrink: unset;
   }
 
   .holiday_section {
     width: 100%;
+    flex-shrink: unset;
+    position: static;
     margin-top: 16px;
   }
-}
 
-:host {
-  display: block;
-  min-height: 100vh;
-  background: var(--bg-page);
+  .day_cell {
+    min-height: 50px;
+    padding: 4px;
+  }
+
+  .day_number {
+    font-size: 11px;
+  }
 }

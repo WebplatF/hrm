@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -29,38 +29,38 @@ export class HolidayManagement {
     'September', 'October', 'November', 'December'
   ];
 
-  weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
   holidays: Holiday[] = [
-    { date: '2026-01-01', name: 'New Year\'s Day',   type: 'National' },
-    { date: '2026-01-14', name: 'Pongal',            type: 'Regional' },
-    { date: '2026-01-15', name: 'Thiruvalluvar Day', type: 'Regional' },
-    { date: '2026-01-26', name: 'Republic Day',      type: 'National' },
-    { date: '2026-03-30', name: 'Holi',              type: 'National' },
-    { date: '2026-04-02', name: 'Good Friday',       type: 'National' },
-    { date: '2026-04-14', name: 'Tamil New Year',    type: 'Regional' },
-    { date: '2026-05-01', name: 'Labour Day',        type: 'National' },
-    { date: '2026-08-15', name: 'Independence Day',  type: 'National' },
-    { date: '2026-10-02', name: 'Gandhi Jayanti',    type: 'National' },
-    { date: '2026-10-20', name: 'Dussehra',          type: 'National' },
-    { date: '2026-11-05', name: 'Diwali',            type: 'National' },
-    { date: '2026-12-25', name: 'Christmas Day',     type: 'National' },
-    { date: '2025-01-01', name: 'New Year\'s Day',   type: 'National' },
-    { date: '2025-01-14', name: 'Pongal',            type: 'Regional' },
-    { date: '2025-01-26', name: 'Republic Day',      type: 'National' },
-    { date: '2025-05-01', name: 'Labour Day',        type: 'National' },
-    { date: '2025-08-15', name: 'Independence Day',  type: 'National' },
-    { date: '2025-10-02', name: 'Gandhi Jayanti',    type: 'National' },
-    { date: '2025-10-23', name: 'My Birthday',       type: 'National' },
-    { date: '2025-12-25', name: 'Christmas Day',     type: 'National' },
-
+    { date: '2026-01-01', name: 'New Year\'s Day',    type: 'National' },
+    { date: '2026-01-14', name: 'Pongal',             type: 'Regional' },
+    { date: '2026-01-15', name: 'Thiruvalluvar Day',  type: 'Regional' },
+    { date: '2026-01-26', name: 'Republic Day',       type: 'National' },
+    { date: '2026-03-30', name: 'Holi',               type: 'National' },
+    { date: '2026-04-02', name: 'Good Friday',        type: 'National' },
+    { date: '2026-04-14', name: 'Tamil New Year',     type: 'Regional' },
+    { date: '2026-05-01', name: 'Labour Day',         type: 'National' },
+    { date: '2026-08-15', name: 'Independence Day',   type: 'National' },
+    { date: '2026-10-02', name: 'Gandhi Jayanti',     type: 'National' },
+    { date: '2026-10-20', name: 'Dussehra',           type: 'National' },
+    { date: '2026-11-05', name: 'Diwali',             type: 'National' },
+    { date: '2026-12-25', name: 'Christmas Day',      type: 'National' },
+    { date: '2025-01-01', name: 'New Year\'s Day',    type: 'National' },
+    { date: '2025-01-14', name: 'Pongal',             type: 'Regional' },
+    { date: '2025-01-26', name: 'Republic Day',       type: 'National' },
+    { date: '2025-05-01', name: 'Labour Day',         type: 'National' },
+    { date: '2025-08-15', name: 'Independence Day',   type: 'National' },
+    { date: '2025-10-02', name: 'Gandhi Jayanti',     type: 'National' },
+    { date: '2025-10-23', name: 'My Birthday',        type: 'National' },
+    { date: '2025-12-25', name: 'Christmas Day',      type: 'National' },
   ];
 
   get calendarDays(): (number | null)[] {
     const firstDay = new Date(this.selectedYear, this.selectedMonth, 1).getDay();
+    const adjustedFirst = (firstDay === 0 ? 6 : firstDay - 1);
     const daysInMonth = new Date(this.selectedYear, this.selectedMonth + 1, 0).getDate();
     const days: (number | null)[] = [];
-    for (let i = 0; i < firstDay; i++) days.push(null);
+    for (let i = 0; i < adjustedFirst; i++) days.push(null);
     for (let d = 1; d <= daysInMonth; d++) days.push(d);
     return days;
   }
@@ -71,7 +71,7 @@ export class HolidayManagement {
   }
 
   get isFutureMonth(): boolean {
-    const selected = new Date(this.selectedYear, this.selectedMonth, 1);
+    const selected = new Date(Number(this.selectedYear), Number(this.selectedMonth), 1);
     const current = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
     return selected > current;
   }
@@ -81,21 +81,39 @@ export class HolidayManagement {
     return this.holidays.find(h => h.date === this.selectedDate) || null;
   }
 
+  prevMonth(): void {
+    this.selectedDate = null;
+    if (Number(this.selectedMonth) === 0) {
+      this.selectedMonth = 11;
+      this.selectedYear = Number(this.selectedYear) - 1;
+    } else {
+      this.selectedMonth = Number(this.selectedMonth) - 1;
+    }
+  }
+
+  nextMonth(): void {
+    this.selectedDate = null;
+    if (Number(this.selectedMonth) === 11) {
+      this.selectedMonth = 0;
+      this.selectedYear = Number(this.selectedYear) + 1;
+    } else {
+      this.selectedMonth = Number(this.selectedMonth) + 1;
+    }
+  }
+
   getDateString(day: number): string {
-    return `${this.selectedYear}-${String(this.selectedMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    return `${this.selectedYear}-${String(Number(this.selectedMonth) + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
   }
 
   isHolidayDay(day: number): boolean {
-      // const dateStr = this.getDateString(day);
-      // console.log('checking:', dateStr);
     return this.holidays.some(h => h.date === this.getDateString(day));
   }
 
   isToday(day: number): boolean {
     return (
       day === this.today.getDate() &&
-      this.selectedMonth === this.today.getMonth() &&
-      this.selectedYear === this.today.getFullYear()
+      Number(this.selectedMonth) === this.today.getMonth() &&
+      Number(this.selectedYear) === this.today.getFullYear()
     );
   }
 
