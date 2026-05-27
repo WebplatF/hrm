@@ -28,6 +28,7 @@ export class DailyAttendance {
     {
       sno: 1,
       name: 'Johnathan Doe',
+      employeeId: 'EMP001',
       check_in: '10:00 AM',
       check_out: '3:00 PM',
       working_hours: '5h 0m',
@@ -36,6 +37,7 @@ export class DailyAttendance {
       {
       sno: 2,
       name: 'Sarah Smith',
+      employeeId: 'EMP002',
       check_in: '10:30 AM',
       check_out: '6:00 PM',
       working_hours: '7h 30m',
@@ -44,6 +46,7 @@ export class DailyAttendance {
       {
       sno: 3,
       name: 'Mark Jenkins',
+      employeeId: 'EMP003',
       check_in: '11:00 AM',
       check_out: '5:10 PM',
       working_hours: '6h 10m',
@@ -52,6 +55,7 @@ export class DailyAttendance {
       {
       sno: 4,
       name: 'Anita Lee',
+      employeeId: 'EMP004',
       check_in: '10:10 AM',
       check_out: '7:00 PM',
       working_hours: '8h 50m',
