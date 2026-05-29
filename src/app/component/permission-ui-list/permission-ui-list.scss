@@ -1,12 +1,13 @@
 .permissionlist {
   min-height: 100vh;
   background-color: var(--bg-page);
+  
 }
 
 .header {
   display: flex;
   align-items: center;
-  padding: 28px 32px;
+  padding: 46px 32px;
   gap: 16px;
 
   @media (max-width: 768px) {
