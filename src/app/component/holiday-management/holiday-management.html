@@ -1,6 +1,5 @@
 <div class="holiday_page">
 
-  <!-- Header -->
   <div class="header">
     <div class="header_info">
       <h1 class="header_title">Holiday Management</h1>
@@ -8,45 +7,34 @@
     </div>
   </div>
 
-  <!-- Content -->
   <div class="content_wrapper">
 
-    <!-- Calendar (67%) -->
+    <!-- Calendar 67% -->
     <div class="calendar_section">
       <div class="calendar_card">
 
-        <!-- Calendar Nav -->
         <div class="calendar_nav">
-          <button class="nav_btn" (click)="prevMonth()">&#8249;</button>
-          <div class="nav_selectors">
-            <select class="nav_select" [(ngModel)]="selectedMonth" (ngModelChange)="onMonthChange()">
-              @for (m of months; track m; let i = $index) {
-                <option [value]="i">{{ m }}</option>
-              }
-            </select>
-            <select class="nav_select" [(ngModel)]="selectedYear" (ngModelChange)="onMonthChange()">
-              @for (y of years; track y) {
-                <option [value]="y">{{ y }}</option>
-              }
-            </select>
+          <div class="nav_left">
+            <button class="nav_btn" (click)="prevMonth()">&#8249;</button>
+            <button class="nav_btn" (click)="nextMonth()">&#8250;</button>
+            <span class="nav_label">{{ months[selectedMonth] }}&nbsp;&nbsp;{{ selectedYear }}</span>
           </div>
-          <button class="nav_btn" (click)="nextMonth()">&#8250;</button>
+          <button class="today_btn" (click)="goToToday()">Today</button>
         </div>
 
-        <!-- Weekday Labels -->
         <div class="weekday_row">
-          @for (day of weekDays; track day) {
-            <div class="weekday_label">{{ day }}</div>
+          @for (day of weekDays; track day; let i = $index) {
+            <div class="weekday_label" [class.weekend_label]="i === 5 || i === 6">{{ day }}</div>
           }
         </div>
 
-        <!-- Days Grid -->
         <div class="days_grid">
           @for (day of calendarDays; track $index) {
             <div
               class="day_cell"
               [class.empty]="!day"
-              [class.today]="day && isToday(day)"
+              [class.weekend]="day && isWeekend(day)"
+              [class.today]="day && isToday(day) && showTodayCircle"
               [class.selected]="day && isSelected(day)"
               [class.holiday]="day && isHolidayDay(day)"
               [class.selected_holiday]="day && isSelected(day) && isHolidayDay(day)"
@@ -58,27 +46,38 @@
           }
         </div>
 
-      </div>  
-    </div>  
-    <!-- Holiday List (25%) -->
+      </div>
+    </div>
+
+    <!-- Holiday Panel 25% -->
     <div class="holiday_section">
       <div class="holiday_card">
 
-        @if (!selectedDate) {
-          <div class="holiday_list_header">
-            <span class="holiday_list_title">{{ months[selectedMonth] }} Holidays</span>
-          </div>
+        <div class="holiday_list_header">
+          <span class="holiday_list_title">{{ months[selectedMonth] }} Holidays</span>
+          <!-- Add button — date select பண்ணா மட்டும், past month இல்லன்னா -->
+          @if (selectedDate && !isPastMonth) {
+            <button class="add_icon_btn" (click)="openAddForm()" title="Add Holiday">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          }
+        </div>
 
-          @if (isFutureMonth || monthHolidays.length === 0) {
+        <!-- No date selected -->
+        @if (!selectedDate) {
+          @if (monthHolidays.length === 0) {
             <div class="empty_state">
               <i class="bi bi-calendar-x empty_icon"></i>
               <span class="empty_text">No holidays scheduled</span>
+              <span class="empty_hint">Select a date to add a holiday</span>
             </div>
           } @else {
             <div class="holiday_list">
               @for (h of monthHolidays; track h.date) {
                 <div class="holiday_item">
-                  <div class="holiday_dot_large" [class]="getTypeClass(h.type)"></div>
+                  <div class="holiday_icon_wrap" [class]="getTypeClass(h.type)">
+                    <i class="bi" [class]="getTypeIcon(h.type)"></i>
+                  </div>
                   <div class="holiday_item_info">
                     <span class="holiday_item_name">{{ h.name }}</span>
                     <span class="holiday_item_date">{{ formatDate(h.date) }}</span>
@@ -90,20 +89,16 @@
           }
         }
 
+        <!-- Date selected -->
         @if (selectedDate) {
-          <div class="holiday_list_header">
-            <span class="holiday_list_title">{{ formatDate(selectedDate) }}</span>
-            <button class="clear_btn" (click)="selectedDate = null">
-              <i class="bi bi-x"></i>
-            </button>
-          </div>
 
           @if (selectedHoliday) {
             <div class="selected_holiday_card">
-              <div class="holiday_dot_large" [class]="getTypeClass(selectedHoliday.type)"></div>
+              <div class="holiday_icon_wrap large" [class]="getTypeClass(selectedHoliday.type)">
+                <i class="bi" [class]="getTypeIcon(selectedHoliday.type)"></i>
+              </div>
               <div class="selected_holiday_info">
                 <span class="selected_holiday_name">{{ selectedHoliday.name }}</span>
-                <span class="selected_holiday_date">{{ formatDate(selectedHoliday.date) }}</span>
                 <span class="holiday_item_type" [class]="getTypeClass(selectedHoliday.type)">
                   {{ selectedHoliday.type }}
                 </span>
@@ -116,7 +111,9 @@
                 @for (h of monthHolidays; track h.date) {
                   @if (h.date !== selectedDate) {
                     <div class="holiday_item">
-                      <div class="holiday_dot_large" [class]="getTypeClass(h.type)"></div>
+                      <div class="holiday_icon_wrap" [class]="getTypeClass(h.type)">
+                        <i class="bi" [class]="getTypeIcon(h.type)"></i>
+                      </div>
                       <div class="holiday_item_info">
                         <span class="holiday_item_name">{{ h.name }}</span>
                         <span class="holiday_item_date">{{ formatDate(h.date) }}</span>
@@ -131,12 +128,43 @@
             <div class="empty_state">
               <i class="bi bi-calendar2 empty_icon"></i>
               <span class="empty_text">No holiday on this date</span>
+              @if (!isPastMonth) {
+                <span class="empty_hint">Click + to add a holiday</span>
+              }
             </div>
           }
+
+          <!-- Add Form -->
+          @if (showAddForm && !isPastMonth) {
+            <div class="add_holiday_form">
+              <div class="form_field">
+                <input
+                  type="text"
+                  placeholder="Holiday name *"
+                  [(ngModel)]="newHolidayName"
+                  class="holiday_input"
+                  [class.input_error]="nameError"
+                  (input)="nameError = false" />
+                @if (nameError) {
+                  <span class="error_text">Holiday name is required</span>
+                }
+              </div>
+              <select [(ngModel)]="newHolidayType" class="holiday_input">
+                <option value="National">National</option>
+                <option value="Regional">Regional</option>
+                <option value="Optional">Optional</option>
+              </select>
+              <div class="form_actions">
+                <button class="save_btn" (click)="addHoliday()">Save</button>
+                <button class="cancel_btn" (click)="cancelAdd()">Cancel</button>
+              </div>
+            </div>
+          }
+
         }
 
       </div>
-    </div>  
+    </div>
 
-  </div>  
-</div>  
+  </div>
+</div>
