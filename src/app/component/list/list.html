@@ -32,7 +32,7 @@
   </td>
   }
   <td class="col_edit">
-    <button class="action_btn view employee_edit_btn">
+    <button class="action_btn view employee_edit_btn" title="Edit">
       <i class="bi bi-pencil-square"></i>
     </button>
   </td>
@@ -72,10 +72,10 @@
   </td>
   }
   <td class="col_edit" [class.only_view]="row['status'] !== 'Pending'">
-    <button class="action_btn view"><i class="bi bi-eye"></i></button>
+    <button class="action_btn view" title="view"><i class="bi bi-eye"></i></button>
     @if (row['status'] === 'Pending') {
-    <button class="action_btn accept"><i class="bi bi-check-lg"></i></button>
-    <button class="action_btn reject"><i class="bi bi-x"></i></button>
+    <button class="action_btn accept" title="accept"><i class="bi bi-check-lg"></i></button>
+    <button class="action_btn reject" title="reject"><i class="bi bi-x"></i></button>
     }
   </td>
 </tr>
@@ -121,7 +121,7 @@
   }
   @if (showActions) {
   <td class="col_edit only_view">
-    <button class="action_btn view"><i class="bi bi-eye"></i></button>
+    <button class="action_btn view" title="view"><i class="bi bi-eye"></i></button>
   </td>
   }
 </tr>
@@ -160,10 +160,10 @@
   </td>
   }
   <td class="col_edit" [class.only_view]="row['status'] !== 'Pending'">
-    <button class="action_btn view"><i class="bi bi-eye"></i></button>
+    <button class="action_btn view" title="view"><i class="bi bi-eye"></i></button>
     @if (row['status'] === 'Pending') {
-    <button class="action_btn accept"><i class="bi bi-check-lg"></i></button>
-    <button class="action_btn reject"><i class="bi bi-x"></i></button>
+    <button class="action_btn accept" title="accept"><i class="bi bi-check-lg"></i></button>
+    <button class="action_btn reject" title="reject"><i class="bi bi-x"></i></button>
     }
   </td>
 </tr>
