@@ -1,3 +1,11 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
 .permissionlist {
   min-height: 100vh;
   background-color: var(--bg-page);
@@ -7,12 +15,17 @@
 .header {
   display: flex;
   align-items: center;
-  padding: 46px 32px;
-  gap: 16px;
+  // padding: 46px 32px;
+  padding-top: 46px;
+  padding-bottom: 24px;
+  padding-left: 32px;
+  padding-right: 32px;
+  
+  // gap: 16px;
 
   @media (max-width: 768px) {
-    padding: 16px 14px;
-    margin-top: 24px;
+    padding: 52px 14px;
+    // margin-top: 24px;
   }
 }
 

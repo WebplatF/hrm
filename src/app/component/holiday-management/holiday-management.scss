@@ -1,3 +1,11 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
 .holiday_page {
   min-height: 100vh;
   background-color: var(--bg-page);
@@ -8,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 46px 32px 16px;
+  padding: 42px 32px 16px;
 }
 
 .header_info {
@@ -30,6 +38,7 @@
   font-weight: 100;
   color: var(--input-color);
   letter-spacing: 1px;
+  margin-bottom: 24px;
 }
 
 .content_wrapper {
@@ -493,7 +502,7 @@
     align-items: flex-start;
     gap: 16px;
     padding: 16px 14px;
-    margin-top: 24px;
+    margin-top: 42px;
   }
 
   .content_wrapper {
