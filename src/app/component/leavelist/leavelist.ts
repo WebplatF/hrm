@@ -1,14 +1,14 @@
 import { Component,ViewEncapsulation } from '@angular/core';
-import { Employeelist } from '../employeelist/employeelist';
 import { Tablebody, TableColumn } from '../tablebody/tablebody';
+import { Employeelist } from '../employeelist/employeelist';
 
 @Component({
   selector: 'app-leave-list',
-  imports: [Employeelist, Tablebody],
+  imports: [Tablebody],
   templateUrl: './leavelist.html',
    styleUrls: [
     './leavelist.scss',
-    '../employeelist/employeelist.scss',
+    '../employeelist/view/employeelist.scss',
     '../tablebody/tablebody.scss',
     '../list/list.scss'
   ],

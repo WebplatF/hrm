@@ -6,6 +6,7 @@ import { Employeelist } from './component/employeelist/employeelist';
 
 @Component({
   selector: 'app-root',
+  standalone:true,
   imports: [RouterOutlet,ToastComponent,Sidebar,Employeelist],
   templateUrl: './app.html',
   styleUrl: './app.scss'

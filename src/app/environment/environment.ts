@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://api.lampauto.in/api/'
+  apiBaseUrl: 'http://192.168.29.78:8000'
 };

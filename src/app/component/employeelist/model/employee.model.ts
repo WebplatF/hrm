@@ -1,0 +1,20 @@
+export interface Employee {
+  id: number;
+  admin_id: number;
+  name: string;
+  email: string;
+  emp_code: string;
+  department_id: number;
+  desigination: string;
+  date_of_join: string;
+  image: string | null;
+  is_delete: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface EmployeeListResponse {
+  status: number;
+  message: string;
+  data: Employee[];
+}

@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-employee',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './create-employee.html',
-  styleUrl: './create-employee.scss',
+  templateUrl: './view/create-employee.html',
+  styleUrl: './view/create-employee.scss',
 })
 
 
