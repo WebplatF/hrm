@@ -1,19 +1,23 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import {FormBuilder,FormGroup,FormsModule,ReactiveFormsModule,Validators,} from '@angular/forms';
 import { LoginState } from './state/login.state';
 import { LoginRepository } from './repositories/login.repository';
 import { LoginRepositoryImpl } from './repositories/login.repository.impl';
 import { LoginUseCase } from './usecase/login.usecase';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoginService } from './services/login.service';
-import { ToastComponent } from '../../../service/toast/toast';
+import { AbstractControl } from '@angular/forms';
+import { AccessType } from './model/login.model';
+
+export function emailOrPhoneValidator(control: AbstractControl) {
+  const value = control.value?.trim();
+  if (!value) return null;
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  return emailRegex.test(value) ? null : { invalidEmail: true };
+}
 
 @Component({
   selector: 'app-login-Main',
@@ -23,8 +27,6 @@ import { ToastComponent } from '../../../service/toast/toast';
     FormsModule,
     ReactiveFormsModule,
     RouterLink,
-    RouterLinkActive,
-    ToastComponent,
   ],
   templateUrl: '../login/view/login.html',
   styleUrl: '../login/view/login.scss',
@@ -38,35 +40,47 @@ import { ToastComponent } from '../../../service/toast/toast';
     },
   ],
 })
-export class LoginMain {
-  private state = inject(LoginState);
-  private route = inject(Router);
+export class LoginMain implements OnInit {
+  private state          = inject(LoginState);
+  private route          = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
-  private fb = inject(FormBuilder);
-  private cd = inject(ChangeDetectorRef);
+  private fb             = inject(FormBuilder);
+  private cd             = inject(ChangeDetectorRef);
+
+  constructor(private router: Router) {}
 
   loginform!: FormGroup;
-  submitted = false;
-  loading = false;
+  submitted    = false;
   showPassword = false;
-  accessType = 'admin';
+  accessType :AccessType  = 'admin';
 
   loading$ = this.state.loading$;
-  error$ = this.state.error$;
+  error$   = this.state.error$;
 
   ngOnInit(): void {
+
     this.activatedRoute.queryParams.subscribe((params) => {
       this.accessType = params['tag'] || 'admin';
     });
 
+
     this.loginform = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email:    ['', [Validators.required, emailOrPhoneValidator]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
 
-    // this.state.user$.subscribe((user: any) => {
-    //   if (user) this.route.navigateByUrl('dashboard');
-    // });
+    this.loginform.get('email')?.valueChanges.subscribe((value) => {
+      if (!value) return;
+      if (/^\d/.test(value)) {
+        let digits = value.replace(/\D/g, '').substring(0, 10);
+        this.loginform.get('email')?.setValue(digits, { emitEvent: false });
+      }
+    });
+    
+    this.state.user$.subscribe((user: any) => {
+      console.log('user$ triggered:', user);
+      if (user) this.route.navigate(['/main/dashboard']);
+    });
   }
 
   get f() {
@@ -77,29 +91,16 @@ export class LoginMain {
     this.showPassword = !this.showPassword;
   }
 
- 
-
-  email = 'admin@gmail.com';
-  password = 'admin123';
-
-  constructor(private router: Router) {}
-
-   onSubmit(): void {
+  onSubmit(): void {
     this.submitted = true;
 
     if (this.loginform.invalid) {
-      this.loading = false;
       return;
     }
-    else if(this.email === 'admin@gmail.com' && this.password === 'admin123'){
-      this.router.navigate(['/main/dashboard']);
 
-    }
-
-    this.loading = true;
     this.state.login({
-      email: this.loginform.value.email,
-      password: this.loginform.value.password,
+      email:       this.loginform.value.email,
+      password:    this.loginform.value.password,
       access_type: this.accessType,
     });
   }
