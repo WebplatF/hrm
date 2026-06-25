@@ -1,14 +1,14 @@
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { LoginRepository } from './login.repository';
 import { LoginRequest, LoginResponse } from '../model/login.model';
-import { Observable } from 'rxjs';
-import { HttpEngine } from '../../../../service/engine/httpengine';
- 
+import { LoginService } from '../services/login.service';
+
 @Injectable({ providedIn: 'root' })
 export class LoginRepositoryImpl implements LoginRepository {
-  http = inject(HttpEngine);
- 
+  private service = inject(LoginService);
+
   login(data: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>('/login', data,false);
+    return this.service.login(data);
   }
 }

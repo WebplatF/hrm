@@ -5,20 +5,14 @@ export interface LoginRequest {
   password: string;
   access_type: AccessType;
 }
-export interface UserDetails{
-  id:number;
-  name: string;
-  email:string;
-}
 
 export interface LoginResult {
-   accessToken: string;
-  refreshToken: string;
-  userDetails: UserDetails;
+  access_token: string;
+  refresh_token: string;
 }
 
 export interface LoginResponse {
-  status: boolean;
+  status: number;
   message: string;
   data: LoginResult;
 }

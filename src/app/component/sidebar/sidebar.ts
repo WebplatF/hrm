@@ -1,7 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { CommonModule} from '@angular/common';
+import { Component, HostListener ,inject} from '@angular/core';
 import { routes } from '../../app.routes';
 import { Router, RouterModule } from '@angular/router';
+import { StorageEngine } from '../../../service/interceptor/storage';
+import { LoginState } from '../login/state/login.state';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,6 +14,8 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class Sidebar {
   private _activeMenu: string = 'Dashboard';
+  private storage = inject(StorageEngine);
+  private state   = inject(LoginState);
 
   get activeMenu(): string {
     return this._activeMenu;
@@ -19,8 +23,9 @@ export class Sidebar {
 
   set activeMenu(value: string) {
     if (value === 'logout') {
-      localStorage.removeItem('token');
-      sessionStorage.clear();
+      // localStorage.removeItem('token');
+      this.storage.clear();
+      this.state.isLoggedIn$.next(false); 
       this.router.navigate(['/login']);
       return;
     }
