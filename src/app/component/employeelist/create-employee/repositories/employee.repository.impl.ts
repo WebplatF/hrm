@@ -1,16 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmployeeRepository } from './employee.repository';
 import { EmployeeListResponse } from '../../model/employee.model';
 import { EmployeeService } from '../services/employee.service';
 
 @Injectable({ providedIn: 'root' })
-export class EmployeeRepositoryImpl extends EmployeeRepository {
-  constructor(private service: EmployeeService) {
-    super();
-  }
+export class EmployeeRepositoryImpl implements EmployeeRepository {
+  private service = inject(EmployeeService);
 
-  override getEmployeeList(): Observable<EmployeeListResponse> {
+  getEmployeeList(): Observable<EmployeeListResponse> {
     return this.service.getEmployeeList();
   }
 }

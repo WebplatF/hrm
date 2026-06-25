@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HttpEngine } from '../../../../../service/engine/httpengine';
 import { EmployeeListResponse } from '../../model/employee.model';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
-  constructor(private http: HttpEngine) {}
+  private http = inject(HttpEngine); 
 
-  getEmployeeList() {
+  getEmployeeList(): Observable<EmployeeListResponse> {
     return this.http.get<EmployeeListResponse>('/employee', true);
   }
 }
