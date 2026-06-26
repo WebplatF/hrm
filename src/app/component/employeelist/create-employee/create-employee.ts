@@ -147,11 +147,11 @@ selectedFileName: string = ''; //Stores uploaded file name. ex.(myphoto).png
 
   ];
 
-  get visibleFields() {
-  return this.employeeFields.filter(field => 
-    this.isEditMode ? field.model !== 'email' && field.model !== 'department' : true
-  );
-}
+//   get visibleFields() {
+//   return this.employeeFields.filter(field => 
+//     this.isEditMode ? field.model !== 'email' && field.model !== 'department' : true
+//   );
+// }
 
   // SAVE EMPLOYEE
 
@@ -160,7 +160,7 @@ saveEmployee(){
   // IMAGE VALIDATION
 
    if (!this.isEditMode && !this.selectedFile) {
-    this.imageError = true;
+    this.imageError = false;
   }
 
   // FORM VALIDATION
