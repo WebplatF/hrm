@@ -5,8 +5,9 @@ import { Dashboard } from './component/dashboard/dashboard';
 import { Employeelist } from './component/employeelist/employeelist';
 import { LeaveList } from './component/leavelist/leavelist';
 import { CreateEmployee } from './component/employeelist/create-employee/create-employee';
-
-
+import { DailyAttendance } from './component/daily-attendance/daily-attendance';
+import { PermissionUiList } from './component/permission-ui-list/permission-ui-list';
+import { HolidayManagement } from './component/holiday-management/holiday-management';
 
 export const routes: Routes = [
      { path: 'login', component: LoginMain },
@@ -18,7 +19,10 @@ export const routes: Routes = [
       { path: 'dashboard', component: Dashboard },
       { path: 'employees', component: Employeelist },
       {path:'employee/create',component:CreateEmployee},
-      { path: 'leaves', component: LeaveList },
+      {path: 'leaves', component: LeaveList },
+      {path:'attendance',component:DailyAttendance},
+      {path:"permission",component:PermissionUiList},
+      {path:"holiday",component:HolidayManagement}
       
     ]
   },

@@ -13,6 +13,7 @@ export interface Employee {
 
 @Component({
   selector: '[app-list]',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './list.html',
   styleUrl: './list.scss',
@@ -23,12 +24,12 @@ export class List {
   @Input() mode: 'employee' | 'leave' = 'employee'; 
   @Output() onEdit = new EventEmitter<any>(); 
 
-  get isLeaveMode(): boolean {
-    return this.mode === 'leave';
-  }
+  @Input() mode: 'employee' | 'leave' | 'attendance' |'permission' = 'employee';
+  @Input() showActions: boolean = false;
+
 
   getInitials(name: string): string {
-    return name.split(' ').map((n: string) => n[0]).join('').substring(0, 1).toUpperCase();
+    return name ?.split(' ').map((n: string) => n[0]).join('').substring(0, 1).toUpperCase();
   }
 
   onToggleStatus(employee: Employee): void {

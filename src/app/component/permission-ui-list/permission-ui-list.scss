@@ -1,0 +1,60 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+.permissionlist {
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  // padding: 46px 32px;
+  padding-top: 46px;
+  padding-bottom: 24px;
+  padding-left: 32px;
+  padding-right: 32px;
+  
+  // gap: 16px;
+
+  @media (max-width: 768px) {
+    padding: 52px 14px;
+    // margin-top: 24px;
+  }
+}
+
+.header_info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.header_title {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.header_subtitle {
+  font-size: 12px;
+  font-weight: 100;
+  color: var(--input-color);
+  letter-spacing: 1px;
+}
+
+:host ::ng-deep .table_header {
+  padding: 24px 28px;
+}
+
+.permission_table .table_title {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}

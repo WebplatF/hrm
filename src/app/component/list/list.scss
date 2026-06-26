@@ -93,6 +93,8 @@
   &.rejected { background: var(--reject-back);   color: var(--reject-color); }
 }
 
+
+
 /* Toggle Switch */
 .toggle_switch {
   position: relative;
@@ -172,8 +174,6 @@
 .col_edit.only_view .action_btn.view {
   margin-left: 33px;
 }
-
-
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .emp_row td { padding: 12px 12px; }

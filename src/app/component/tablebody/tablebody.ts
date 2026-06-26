@@ -18,11 +18,13 @@ export class Tablebody {
   @Input() tableTitle: string = 'Employee Directory';
   @Input() columns: TableColumn[] = [];
   @Input() data: any[] = [];
-  @Input() mode: 'employee' | 'leave' = 'employee';
+  @Input() mode: 'employee' | 'leave'|'attendance' | 'permission'= 'employee';
   @Input() showActions: boolean = true;
   @Output() onEdit = new EventEmitter<any>();
   handleEdit(row: any) { 
     this.onEdit.emit(row);
   }
+  @Input() showActionLabel:boolean=false;
+
 }
 
