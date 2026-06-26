@@ -25,7 +25,8 @@ export class Employeelist {
       sno: 1,
       name: 'Johnathan Doe',
       role: 'Senior UI Designer',
-      email: 'Designer_01',
+      employeeCode: 'Designer_01',
+      email: 'johnathan@company.com',
       dateOfJoin: '12 Jan 2023',
       isActive: true,
     },
@@ -33,15 +34,17 @@ export class Employeelist {
       sno: 2,
       name: 'Sarah Smith',
       role: 'Project Lead',
-      email: 'Lead_01',
+      employeeCode: 'Lead_01',
       dateOfJoin: '24 Feb 2023',
+      email: 'johnathan@company.com',
       isActive: true,
     },
     {
       sno: 3,
       name: 'Mark Jenkins',
       role: 'Full Stack Developer',
-      email: 'Developer_01',
+       employeeCode: 'Developer_01',
+       email: 'johnathan@company.com',
       dateOfJoin: '15 Mar 2023',
       isActive: false,
     },
@@ -49,12 +52,19 @@ export class Employeelist {
       sno: 4,
       name: 'Anita Lee',
       role: 'HR Coordinator',
-      email: 'HR_01',
+      employeeCode: 'HR_01',
       dateOfJoin: '02 Apr 2023',
+      email: 'johnathan@company.com',
       isActive: true,
     },
   ];
   createEmployee() {
     this.router.navigateByUrl('main/employee/create');
   }
+
+  editEmployee(employee: any) {
+  this.router.navigate(['main/employee/create'], {
+    state: { employeeData: employee, isEdit: true }
+  });
+}
 }

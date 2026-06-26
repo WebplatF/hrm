@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input,Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { List } from '../list/list';
 
 export interface TableColumn {
   key: string;
   label: string;
-  type: 'avatar' | 'text' | 'date' | 'toggle' | 'status-action';
+  type: 'avatar' | 'text' | 'date' | 'toggle' | 'status-action' | 'action';
 }
 
 @Component({
@@ -20,6 +20,11 @@ export class Tablebody {
   @Input() data: any[] = [];
   @Input() mode: 'employee' | 'leave'|'attendance' | 'permission'= 'employee';
   @Input() showActions: boolean = true;
+  @Output() onEdit = new EventEmitter<any>();
+  handleEdit(row: any) { 
+    this.onEdit.emit(row);
+  }
   @Input() showActionLabel:boolean=false;
 
 }
+
