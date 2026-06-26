@@ -25,7 +25,9 @@
       <tbody app-list
          [columns]="columns"
          [data]="data"
-          [mode]="mode">
+          [mode]="mode"
+          (onEdit)="handleEdit($event)">
+          >
          </tbody>
     </table>
   </div>

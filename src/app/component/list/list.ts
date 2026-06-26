@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input,Output,EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableColumn } from '../tablebody/tablebody';
 
@@ -21,6 +21,7 @@ export class List {
   @Input() columns: TableColumn[] = [];
   @Input() data: any[] = [];
   @Input() mode: 'employee' | 'leave' = 'employee'; 
+  @Output() onEdit = new EventEmitter<any>(); 
 
   get isLeaveMode(): boolean {
     return this.mode === 'leave';

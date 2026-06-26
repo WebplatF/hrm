@@ -32,10 +32,10 @@
 
     </td>
     <td class="col_edit">
-      <button class="action_btn view employee_edit_btn">
-        <i class="bi bi-pencil-square"></i>
-      </button>
-    </td>
+  <button class="action_btn view employee_edit_btn" (click)="onEdit.emit(emp)"> 
+    <i class="bi bi-pencil-square"></i>
+  </button>
+</td>
   </tr>
 </ng-container>
 
