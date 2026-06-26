@@ -76,10 +76,10 @@
               </option>
 
               <option
-                [value]="option"
+                [value]="option.id"
                 *ngFor="let option of field.options"
               >
-                {{ option }}
+                {{ option.name }}
               </option>
 
             </select>

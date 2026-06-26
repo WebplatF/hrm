@@ -18,3 +18,18 @@ export interface EmployeeListResponse {
   message: string;
   data: Employee[];
 }
+
+export interface CreateEmployeeRequest {
+  name: string;
+  email: string;
+  department_id: number;
+  desigination: string;
+  date_of_join: string;
+  image: string | null;
+}
+
+export interface CreateEmployeeResponse {
+  status: number;
+  message: string;
+  data: Employee;
+}
