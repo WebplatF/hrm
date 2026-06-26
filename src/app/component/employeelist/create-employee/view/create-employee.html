@@ -6,7 +6,7 @@
       <i class="bi bi-arrow-left-short"></i>
     </button>
 
-    <h2 class="page_title">Add New Employee</h2>
+   <h2 class="page_title">{{ isEditMode ? 'Edit Employee' : 'Add New Employee' }}</h2>
   </div>
 
   <!-- ===== FORM CARD ===== -->
@@ -16,11 +16,9 @@
 
     <div class="card_header">
       <h3 class="card_title">Employee Information</h3>
-
-      <p class="card_description">
-        Fill in the primary details to register a new member to the
-        organization.
-      </p>
+<p class="card_description">
+  {{ isEditMode ? 'Update the employee details below.' : 'Fill in the primary details to register a new member to the organization.' }}
+</p>
     </div>
 
     <!-- ===== CARD BODY ===== -->
@@ -232,16 +230,9 @@
           </button>
 
           <!-- SAVE -->
-
-          <button
-            class="save-btn"
-            type="submit"
-            (click)="saveEmployee()"
-          >
-
-            Save Employee
-
-          </button>
+<button class="save-btn" type="submit" (click)="saveEmployee()">
+  {{ isEditMode ? 'Update Employee' : 'Save Employee' }}
+</button>
 
         </div>
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 import {
@@ -18,15 +18,17 @@ import { Router } from '@angular/router';
 })
 
 
-export class CreateEmployee {
+export class CreateEmployee implements OnInit {
 
   previewUrl: string | ArrayBuffer | null =null; //Stores image preview URL.
   showPreview = false; //Controls image preview modal open/close.
   employeeForm!: FormGroup; //Stores entire form. etc. fullname,
 selectedFile: File | null = null;   //Stores uploaded image file.
 selectedFileName: string = ''; //Stores uploaded file name. ex.(myphoto).png
-  selectedFileSize: string = ''; //Stores image size. ex: 2.5MB
-  imageError:boolean = false; //Used for image validation.
+  selectedFileSize: string = ''; 
+  imageError:boolean = false; 
+  isEditMode: boolean = false;  
+  editData: any = null;       
 
   //  CONSTRUCTOR
 
@@ -56,6 +58,40 @@ selectedFileName: string = ''; //Stores uploaded file name. ex.(myphoto).png
 
   });
  
+}
+
+  ngOnInit() {  
+    const state = history.state;
+    if (state?.isEdit && state?.employeeData) {
+      this.isEditMode = true;
+      this.editData = state.employeeData;
+      this.prefillForm(this.editData);
+    }
+  }
+
+    prefillForm(data: any) { 
+    
+    const parsedDate = data.dateOfJoin ? this.convertToInputDate(data.dateOfJoin) : '';
+    this.employeeForm.patchValue({
+      fullName: data.name || '',
+      email: data.email || '',
+      employeeId: data.employeeCode || '',
+      department: data.department || '',
+      desigination: data.role || '',
+      joinDate: parsedDate || '',
+    });
+  
+
+    if (data.profileImg) {
+      this.previewUrl = data.profileImg;
+      this.selectedFileName = 'Current Photo';
+    }
+  }
+
+  convertToInputDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return '';
+  return date.toISOString().split('T')[0];
 }
 
 // FORM FIELDS
@@ -111,39 +147,45 @@ selectedFileName: string = ''; //Stores uploaded file name. ex.(myphoto).png
 
   ];
 
+//   get visibleFields() {
+//   return this.employeeFields.filter(field => 
+//     this.isEditMode ? field.model !== 'email' && field.model !== 'department' : true
+//   );
+// }
+
   // SAVE EMPLOYEE
 
 saveEmployee(){
 
   // IMAGE VALIDATION
 
-  if(!this.selectedFile){
-
-    this.imageError = true;
-
+   if (!this.isEditMode && !this.selectedFile) {
+    this.imageError = false;
   }
 
   // FORM VALIDATION
 
-  if(this.employeeForm.invalid || !this.selectedFile){
-
+  if (this.employeeForm.invalid || (!this.isEditMode && !this.selectedFile)) {
     this.employeeForm.markAllAsTouched();
-
     return;
-
   }
 
   // FINAL DATA
 
   const employeeData = {
+      ...this.employeeForm.value,
+      profileImg: this.selectedFile ? this.selectedFile.name : (this.editData?.profileImg || '')
+    };
 
-    ...this.employeeForm.value,
+  if (this.isEditMode) {
+      console.log('Updated:', employeeData);  
+    } else {
+      console.log('Created:', employeeData); 
+    }
 
-    profileImg : this.selectedFile.name
+     this.resetForm();
+    this.location.back();
 
-  };
-
-  console.log(employeeData);
 
   // RESET EVERYTHING
 
