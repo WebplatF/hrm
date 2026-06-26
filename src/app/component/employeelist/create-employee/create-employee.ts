@@ -235,10 +235,7 @@ this.selectedFile = null;
 this.imageError = false;
 }
 
-  
   // FILE FUNCTION
-
- 
 
   onFileSelected(event: Event){
 

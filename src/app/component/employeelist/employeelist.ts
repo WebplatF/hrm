@@ -72,4 +72,10 @@ export class Employeelist implements OnInit {
   createEmployee(): void {
     this.router.navigateByUrl('main/employee/create');
   }
+
+  editEmployee(employee: any) {
+  this.router.navigate(['main/employee/create'], {
+    state: { employeeData: employee, isEdit: true }
+  });
+}
 }
