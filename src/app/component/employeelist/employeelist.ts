@@ -7,6 +7,8 @@ import { EmployeeUseCase } from './create-employee/usecase/employee.usecase';
 import { EmployeeRepository } from './create-employee/repositories/employee.repository';
 import { EmployeeRepositoryImpl } from './create-employee/repositories/employee.repository.impl';
 import { EmployeeService } from './create-employee/services/employee.service';
+import { ToastService } from '../../../service/toast/toast.service'; 
+import { Employee } from './model/employee.model';
 
 @Component({
   selector: 'app-employeelist',
@@ -25,6 +27,7 @@ export class Employeelist implements OnInit {
   private state   = inject(EmployeeState);
   private usecase = inject(EmployeeUseCase);
   private cd      = inject(ChangeDetectorRef);
+  private toast   = inject(ToastService);
 
   title    = input<string>('Employee Management');
   subtitle = input<string>('Manage and monitor employee status and corporate records.');
@@ -53,7 +56,7 @@ export class Employeelist implements OnInit {
         if (res.status === 200) {
           this.Employee = [...res.data];
           this.state.list$.next(res.data);    
-          this.Employee = res.data;
+          // this.Employee = res.data;
           this.cd.detectChanges(); 
           console.log( res.data);
         } else {
@@ -76,6 +79,44 @@ export class Employeelist implements OnInit {
   editEmployee(employee: any) {
   this.router.navigate(['main/employee/create'], {
     state: { employeeData: employee, isEdit: true }
+  });
+}
+
+onToggle(emp: Employee): void {
+  const payload = { is_delete: emp.is_delete === 0 }; 
+
+  this.usecase.toggleEmployee(emp.id, payload).subscribe({
+    next: (res) => {
+      if (res.status === 200) {
+        this.toast.success(res.message);
+
+        this.loadEmployees();
+      } else {
+        this.state.error$.next(res.message);
+        this.toast.error(res.message);
+      }
+    },
+    error: (err) => {
+      const msg = err?.error?.message || 'Something went wrong';
+      this.state.error$.next(msg);
+      this.toast.error(msg);
+    }
+  });
+}
+
+loadEmployees(): void {
+  this.state.loading$.next(true);
+  this.usecase.getEmployeeList().subscribe({
+    next: (res) => {
+      if (res.status === 200) {
+        this.Employee = [...res.data];
+        this.state.list$.next(res.data);
+      }
+      this.state.loading$.next(false);
+    },
+    error: (err) => {
+      this.state.loading$.next(false);
+    }
   });
 }
 }

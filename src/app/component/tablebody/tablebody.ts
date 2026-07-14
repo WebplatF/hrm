@@ -21,10 +21,17 @@ export class Tablebody {
   @Input() mode: 'employee' | 'leave'|'attendance' | 'permission'= 'employee';
   @Input() showActions: boolean = true;
   @Output() onEdit = new EventEmitter<any>();
-  handleEdit(row: any) { 
+  @Output() toggleStatus = new EventEmitter<any>();
+
+  @Input() showActionLabel:boolean=false;
+
+    handleEdit(row: any) { 
     this.onEdit.emit(row);
   }
-  @Input() showActionLabel:boolean=false;
+
+  onToggle(emp: any): void {
+    this.toggleStatus.emit(emp); 
+  }
 
 }
 

@@ -6,7 +6,6 @@ export interface LoginRequest {
   access_type: AccessType;
 }
 export interface UserDetails{
-
   id:number;
   name: string;
   email:string;

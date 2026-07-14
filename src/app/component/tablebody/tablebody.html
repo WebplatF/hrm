@@ -29,7 +29,8 @@
          [data]="data"
           [mode]="mode"
           (onEdit)="handleEdit($event)">
-          [showActions]="false"
+          [showActions]="false",
+          (toggleStatus)="onToggle($event)"
           >
          </tbody>
     </table>

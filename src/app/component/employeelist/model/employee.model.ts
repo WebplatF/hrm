@@ -33,3 +33,13 @@ export interface CreateEmployeeResponse {
   message: string;
   data: Employee;
 }
+
+export interface ToggleEmployeeRequest {
+  is_delete: boolean;
+}
+
+export interface ToggleEmployeeResponse {
+  status: number;
+  message: string;
+  data: null;
+}

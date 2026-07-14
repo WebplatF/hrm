@@ -24,13 +24,13 @@ export class List {
   @Output() onEdit = new EventEmitter<any>(); 
   @Input() mode: 'employee' | 'leave' | 'attendance' |'permission' = 'employee';
   @Input() showActions: boolean = false;
-
+  @Output() toggleStatus = new EventEmitter<any>(); 
 
   getInitials(name: string): string {
     return name ?.split(' ').map((n: string) => n[0]).join('').substring(0, 1).toUpperCase();
   }
 
-  onToggleStatus(employee: Employee): void {
-    employee.isActive = !employee.isActive;
+  onToggleStatus(emp: any): void {
+    this.toggleStatus.emit(emp); 
   }
 }
