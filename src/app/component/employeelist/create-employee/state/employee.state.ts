@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Employee } from '../../model/employee.model';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeState {
-  loading$ = new BehaviorSubject<boolean>(false);
-  error$   = new BehaviorSubject<string | null>(null);
-  list$    = new BehaviorSubject<Employee[]>([]);
+  loading = signal(false);
+
+  setLoading(status: boolean) {
+    this.loading.set(status);
+  }
 }

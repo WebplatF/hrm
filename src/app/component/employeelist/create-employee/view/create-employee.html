@@ -22,6 +22,9 @@
     </div>
 
     <!-- ===== CARD BODY ===== -->
+     @if (state.loading()) {
+  <div class="loading"></div>
+}
 
     <form [formGroup]="employeeForm">
 

@@ -1,7 +1,6 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { EmployeeUseCase } from './usecase/employee.usecase';
 import { EmployeeRepository } from './repositories/employee.repository';
 import { EmployeeRepositoryImpl } from './repositories/employee.repository.impl';
@@ -25,12 +24,8 @@ export class CreateEmployee implements OnInit {
   private fb       = inject(FormBuilder);
   private location = inject(Location);
   private usecase  = inject(EmployeeUseCase);
-  private state    = inject(EmployeeState);
+  public  state    = inject(EmployeeState); 
   private toast    = inject(ToastService);
-
-
-  loading$ = this.state.loading$;
-  error$   = this.state.error$;
 
   // Image
   previewUrl: string | ArrayBuffer | null = null;
@@ -47,30 +42,30 @@ export class CreateEmployee implements OnInit {
   employeeForm!: FormGroup;
 
   employeeFields = [
-    { label: 'Full Name',     type: 'text',   placeholder: 'e.g. Jonathan Doe',       model: 'fullName'    },
-    { label: 'Email Address', type: 'email',  placeholder: 'j.doe@company.com',        model: 'email'       },
-    { label: 'Employee ID',   type: 'text',   placeholder: 'EMP-2024-001',             model: 'employeeId'  },
+    { label: 'Full Name',     type: 'text',   placeholder: 'e.g. Jonathan Doe',       model: 'fullName'     },
+    { label: 'Email Address', type: 'email',  placeholder: 'j.doe@company.com',        model: 'email'        },
+    { label: 'Employee ID',   type: 'text',   placeholder: 'EMP-2024-001',             model: 'employeeId'   },
     { label: 'Department',    type: 'select', placeholder: '',                          model: 'department',
       options: [
-    { id: 1, name: 'HR' },
-    { id: 2, name: 'Development' },
-  ]},
-    { label: 'Designation',   type: 'text',   placeholder: 'e.g. Senior Software Eng', model: 'desigination'},
-    { label: 'Date Of Join',  type: 'date',   placeholder: '',                          model: 'joinDate'    },
+        { id: 1, name: 'HR' },
+        { id: 2, name: 'Development' },
+      ]
+    },
+    { label: 'Designation',   type: 'text',   placeholder: 'e.g. Senior Software Eng', model: 'desigination' },
+    { label: 'Date Of Join',  type: 'date',   placeholder: '',                          model: 'joinDate'     },
   ];
 
   ngOnInit(): void {
     this.employeeForm = this.fb.group({
-      fullName:    ['', Validators.required],
-      email:       ['', [Validators.required, Validators.email]],
-      employeeId:  ['', Validators.required],
-      department:  ['', Validators.required],
-      desigination:['', Validators.required],
-      joinDate:    ['', Validators.required],
-      profileImg:  [''],
+      fullName:     ['', Validators.required],
+      email:        ['', [Validators.required, Validators.email]],
+      employeeId:   ['', Validators.required],
+      department:   ['', Validators.required],
+      desigination: ['', Validators.required],
+      joinDate:     ['', Validators.required],
+      profileImg:   [''],
     });
 
-    // Edit mode check
     const state = history.state;
     if (state?.isEdit && state?.employeeData) {
       this.isEditMode = true;
@@ -81,16 +76,16 @@ export class CreateEmployee implements OnInit {
 
   prefillForm(data: any): void {
     this.employeeForm.patchValue({
-      fullName:    data.name          || '',
-      email:       data.email         || '',
-      employeeId:  data.emp_code      || '', 
-      department:  data.department_id || '',
-      desigination:data.desigination  || '',
-      joinDate:    data.date_of_join  ? this.convertToInputDate(data.date_of_join) : '',
+      fullName:     data.name          || '',
+      email:        data.email         || '',
+      employeeId:   data.emp_code      || '',
+      department:   data.department_id || '',
+      desigination: data.desigination  || '',
+      joinDate:     data.date_of_join  ? this.convertToInputDate(data.date_of_join) : '',
     });
 
     if (data.image) {
-      this.previewUrl      = data.image;
+      this.previewUrl       = data.image;
       this.selectedFileName = 'Current Photo';
     }
   }
@@ -102,10 +97,6 @@ export class CreateEmployee implements OnInit {
   }
 
   saveEmployee(): void {
-    if (!this.isEditMode && !this.selectedFile) {
-      this.imageError = false;
-    }
-
     if (this.employeeForm.invalid) {
       this.employeeForm.markAllAsTouched();
       return;
@@ -120,8 +111,7 @@ export class CreateEmployee implements OnInit {
       image:         null as string | null,
     };
 
-    this.state.loading$.next(true); 
-    this.state.error$.next(null);
+    this.state.setLoading(true); // ✅ signal pattern
 
     this.usecase.createEmployee(payload).subscribe({
       next: (res) => {
@@ -130,16 +120,14 @@ export class CreateEmployee implements OnInit {
           this.resetForm();
           this.location.back();
         } else {
-          this.state.error$.next(res.message);
           this.toast.error(res.message);
         }
-        this.state.loading$.next(false);
+        this.state.setLoading(false); // ✅
       },
       error: (err) => {
         const msg = err?.error?.message || 'Something went wrong';
-        this.state.error$.next(msg);
         this.toast.error(msg);
-        this.state.loading$.next(false);
+        this.state.setLoading(false); // ✅
       }
     });
   }

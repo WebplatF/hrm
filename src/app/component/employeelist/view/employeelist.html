@@ -11,6 +11,9 @@
       </button>
     }
   </div>
+  @if (state.loading()) {
+  <div class="loading"></div>
+}
   <app-tablebody
     tableTitle="Employee Directory"
     [columns]="columns"

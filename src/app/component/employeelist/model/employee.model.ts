@@ -1,3 +1,9 @@
+export interface ApiResponse<T>{
+    status:boolean;
+    message:string;
+    data:T
+}
+
 export interface Employee {
   id: number;
   admin_id: number;
