@@ -84,17 +84,18 @@
         </label>
 
         <!-- API error -->
-        <p class="api-err" *ngIf="error$ | async as err">{{ err }}</p>
+        <!-- <p class="api-err" *ngIf="error$ | async as err">{{ err }}</p> -->
 
         <!-- Submit -->
-        <button type="submit" class="btn"
-          [disabled]="loading$ | async"
-          [class.btn--loading]="loading$ | async">
-          <span *ngIf="!(loading$ | async)">Sign In</span>
-          <span class="dots" *ngIf="loading$ | async" aria-live="polite">
-            <i></i><i></i><i></i>
-          </span>
-        </button>
+         <button type="submit" class="btn" [disabled]="state.loading()">
+  @if (state.loading()) {
+    <span class="spinner-border spinner-border-sm me-2"></span>
+    Signing In...
+  } @else {
+    Sign In
+  }
+</button>
+
 
       </form>
     </div>

@@ -7,7 +7,8 @@ import { LoginRequest, LoginResponse } from '../model/login.model';
 export class LoginUseCase {
   private repo = inject(LoginRepository);
 
-  login(data: LoginRequest): Observable<LoginResponse> {
-    return this.repo.login(data);
+   execute(payload: LoginRequest): Observable<LoginResponse> {
+    return this.repo.login(payload);
   }
+
 }

@@ -1,11 +1,13 @@
 
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable,signal } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class LoginState {
-  loading$ = new BehaviorSubject<boolean>(false);
-  error$   = new BehaviorSubject<string | null>(null);
-  isLoggedIn$ = new BehaviorSubject<boolean>(false);
-//   user$    = new BehaviorSubject<UserDetails | null>(null);
+
+loading=signal(false);
+
+    setLoading(status:boolean){
+        console.log(this.loading.set(status))
+        return this.loading.set(status);
+    }
 }

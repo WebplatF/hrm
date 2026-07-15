@@ -11,4 +11,5 @@ export class LoginRepositoryImpl implements LoginRepository {
   login(data: LoginRequest): Observable<LoginResponse> {
     return this.service.login(data);
   }
+
 }

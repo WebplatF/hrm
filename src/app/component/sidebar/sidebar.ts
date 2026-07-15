@@ -23,9 +23,7 @@ export class Sidebar {
 
   set activeMenu(value: string) {
     if (value === 'logout') {
-      // localStorage.removeItem('token');
       this.storage.clear();
-      this.state.isLoggedIn$.next(false); 
       this.router.navigate(['/login']);
       return;
     }
