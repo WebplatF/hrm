@@ -21,10 +21,10 @@ export interface Employee {
 export class List {
   @Input() columns: TableColumn[] = [];
   @Input() data: any[] = [];
-  @Output() onEdit = new EventEmitter<any>(); 
   @Input() mode: 'employee' | 'leave' | 'attendance' |'permission' = 'employee';
   @Input() showActions: boolean = false;
   @Output() toggleStatus = new EventEmitter<any>(); 
+  @Output() editClick = new EventEmitter<any>();
 
   getInitials(name: string): string {
     return name ?.split(' ').map((n: string) => n[0]).join('').substring(0, 1).toUpperCase();
@@ -33,4 +33,9 @@ export class List {
   onToggleStatus(emp: any): void {
     this.toggleStatus.emit(emp); 
   }
+
+  onEdit(row: any) {
+  this.editClick.emit(row);
+}
+  
 }

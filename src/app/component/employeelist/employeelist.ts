@@ -40,7 +40,7 @@ export class Employeelist implements OnInit {
     { key: 'is_delete',    label: 'STATUS',          type: 'toggle' },
   ];
 
-  Employee: any[] = [];
+  Employee: Employee[] = [];
 
   ngOnInit(): void {
     this.loadEmployees(); 
@@ -50,14 +50,14 @@ export class Employeelist implements OnInit {
     this.state.setLoading(true); 
     this.usecase.getEmployeeList().subscribe({
       next: (res) => {
-        if (res.status === 200) {
-          this.Employee = [...res.data];
-          this.cd.detectChanges();
-        }
-        this.state.setLoading(false);
+         this.Employee = res.data.taskList;
+         this.toast.success(res.message);
+         this.state.setLoading(false);
+         this.cd.detectChanges();
+         this.state.setLoading(false);
       },
       error: (err) => {
-        this.toast.error(err?.error?.message || 'Something went wrong');
+         this.toast.error(err.error.message);
         this.state.setLoading(false); 
       }
     });

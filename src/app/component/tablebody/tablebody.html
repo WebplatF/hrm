@@ -28,8 +28,8 @@
          [columns]="columns"
          [data]="data"
           [mode]="mode"
-          (onEdit)="handleEdit($event)">
-          [showActions]="false",
+          [showActions]="showActions",
+          (editClick)="onEdit($event)"
           (toggleStatus)="onToggle($event)"
           >
          </tbody>

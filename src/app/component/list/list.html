@@ -24,7 +24,7 @@
     @if (col.type === 'toggle') {
     <div class="status_cell">
       <label class="toggle_switch">
-        <input type="checkbox" [checked]="emp[col.key]" (change)="onToggleStatus(emp)"/>
+        <input type="checkbox" [checked]="emp[col.key]===0" (change)="onToggleStatus(emp)"/>
         <span class="toggle_slider"></span>
       </label>
     </div>
@@ -32,9 +32,9 @@
   </td>
   }
   <td class="col_edit">
-  <button class="action_btn view employee_edit_btn" (click)="onEdit.emit(emp)"> 
-    <i class="bi bi-pencil-square"></i>
-  </button>
+   <button class="action_btn view employee_edit_btn" title="Edit" (click)="onEdit(emp)">
+      <i class="bi bi-pencil-square"></i>
+    </button>
 </td>
 </tr>
 }

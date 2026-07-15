@@ -22,7 +22,13 @@ export interface Employee {
 export interface EmployeeListResponse {
   status: number;
   message: string;
-  data: Employee[];
+  data: ListData;
+}
+
+export interface ListData {
+  currentPage: number;
+  totalRecords: number;
+  taskList: Employee[];
 }
 
 export interface CreateEmployeeRequest {
