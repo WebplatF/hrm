@@ -9,7 +9,7 @@ import { EmployeeRepositoryImpl } from './create-employee/repositories/employee.
 import { EmployeeService } from './create-employee/services/employee.service';
 import { ToastService } from '../../../service/toast/toast.service';
 import { Employee } from './model/employee.model';
-import { loading } from "../../../service/loading/loading";
+import { loading } from '../../../service/loading/loading';
 
 @Component({
   selector: 'app-employeelist',
@@ -24,51 +24,47 @@ import { loading } from "../../../service/loading/loading";
   ],
 })
 export class Employeelist implements OnInit {
-  private router  = inject(Router);
-  public  state   = inject(EmployeeState);
+  private router = inject(Router);
+  public state = inject(EmployeeState);
   private usecase = inject(EmployeeUseCase);
-  private cd      = inject(ChangeDetectorRef);
-  private toast   = inject(ToastService);
-  currentPage:number=1;
+  private cd = inject(ChangeDetectorRef);
+  private toast = inject(ToastService);
+  currentPage: number = 1;
 
-  title    = input<string>('Employee Management');
+  title = input<string>('Employee Management');
   subtitle = input<string>('Manage and monitor employee status and corporate records.');
-  showBtn  = input<boolean>(true);
+  showBtn = input<boolean>(true);
 
   columns: TableColumn[] = [
-    { key: 'name',         label: 'NAME',          type: 'avatar' },
-    { key: 'emp_code',     label: 'EMPLOYEE CODE',  type: 'text'   },
-    { key: 'date_of_join', label: 'DATE OF JOIN',   type: 'date'   },
-    { key: 'is_delete',    label: 'STATUS',          type: 'toggle' },
+    { key: 'name', label: 'NAME', type: 'avatar' },
+    { key: 'emp_code', label: 'EMPLOYEE CODE', type: 'text' },
+    { key: 'date_of_join', label: 'DATE OF JOIN', type: 'date' },
+    { key: 'is_delete', label: 'STATUS', type: 'toggle' },
   ];
 
   Employees: Employee[] = [];
 
   ngOnInit(): void {
-    this.loadPage(this.currentPage)
-
+    this.loadPage(this.currentPage);
   }
 
-    loadPage(page:number){
-     this.loadEmployees(page);
-     this.currentPage=page;
+  loadPage(page: number) {
+    this.loadEmployees(page);
+    this.currentPage = page;
   }
 
-  loadEmployees(page:number): void {
-    this.state.setLoading(true); 
+  loadEmployees(page: number): void {
+    this.state.setLoading(true);
     this.usecase.getEmployeeList(page).subscribe({
       next: (res) => {
-         this.Employees= res.data.taskList;
-         this.cd.detectChanges();
-         this.toast.success(res.message);
-         this.state.setLoading(false);
-         this.state.setLoading(false);
-
+        this.Employees = res.data;
+        this.state.setLoading(false);
+        this.cd.detectChanges();
       },
       error: (err) => {
-         this.toast.error(err.error.message);
-        this.state.setLoading(false); 
-      }
+        this.toast.error(err.error.message);
+        this.state.setLoading(false);
+      },
     });
   }
 
@@ -78,7 +74,7 @@ export class Employeelist implements OnInit {
 
   editEmployee(employee: any): void {
     this.router.navigate(['main/employee/create'], {
-      state: { employeeData: employee, isEdit: true }
+      state: { employeeData: employee, isEdit: true },
     });
   }
 
@@ -89,9 +85,9 @@ export class Employeelist implements OnInit {
   //     next: (res) => {
   //       if (res.status === 200) {
   //         this.toast.success(res.message);
-  //         this.loadEmployees(); 
+  //         this.loadEmployees();
   //       }
-  //       this.state.setLoading(false); 
+  //       this.state.setLoading(false);
   //     },
   //     error: (err) => {
   //       this.toast.error(err?.error?.message || 'Something went wrong');

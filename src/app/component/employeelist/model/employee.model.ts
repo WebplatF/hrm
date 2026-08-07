@@ -19,16 +19,25 @@ export interface Employee {
   updated_at: string;
 }
 
-export interface ListData {
-  currentPage: number;
-  totalRecords: number;
-  taskList: Employee[];
-}
+// export interface ListData {
+//   currentPage: number;
+//   totalRecords: number;
+//   taskList: Employee[];
+// }
+
+// export interface EmployeeListResponse {
+//   status: number;
+//   message: string;
+//   data: ListData;
+// }
 
 export interface EmployeeListResponse {
-  status: number;
+  status: boolean;
   message: string;
-  data: ListData;
+  currentPage: number;
+  totalRecords: number;
+  totalPages: number;
+  data: Employee[];
 }
 
 export interface CreateEmployeeRequest {
