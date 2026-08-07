@@ -37,14 +37,11 @@
   </div>
   <div class="table_footer">
     <span class="table_count">Showing 1 to 4 of 10 employees</span>
-    <div class="pagination">
-      <button class="page_btn nav_btn"><i class="bi bi-chevron-left"></i></button>
-      <button class="page_btn active">1</button>
-      <button class="page_btn">2</button>
-      <button class="page_btn">3</button>
-      <span class="page_dots">...</span>
-      <button class="page_btn">10</button>
-      <button class="page_btn nav_btn"><i class="bi bi-chevron-right"></i></button>
-    </div>
+    <app-pagination
+    [totalItems]="data.length"
+    [limit]="limit"
+    [currentPage]="currentPage"
+    (pageChange)="onPageChange($event)">
+  </app-pagination>
   </div>
 </div>

@@ -1,3 +1,4 @@
+<app-loading *ngIf="state.loading()"></app-loading>
 <div class="employeelist">
   <div class="header">
     <div class="header_info">
@@ -11,16 +12,17 @@
       </button>
     }
   </div>
-  @if (state.loading()) {
-  <div class="loading"></div>
-}
+
   <app-tablebody
     tableTitle="Employee Directory"
     [columns]="columns"
-    [data]="Employee"
+    [data]="Employees"
     mode="employee"
-    (onEdit)="editEmployee($event)"
+    [showActions]="false"
     [showActionLabel]="true"
-    (toggleStatus)="onToggle($event)"
+    (pageChange)="loadPage($event)"
+    (onEdit)="editEmployee($event)"
+   
   />
+    <!-- (toggleStatus)="onToggle($event)"  -->
 </div>

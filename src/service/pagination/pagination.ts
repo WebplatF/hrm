@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { PaginationService } from './pagination.service';
 import { CommonModule } from '@angular/common';
 
@@ -13,8 +13,13 @@ import { CommonModule } from '@angular/common';
 export class Pagination implements OnChanges {
 
   @Input() totalItems: number = 0;
+  @Input() limit: number = 10;
+  @Input() currentPage: number = 1;
 
-  totalPages: number = 0;
+  @Output() pageChange = new EventEmitter<number>();
+
+
+  totalPages: number = 1;
   pages: number[] = [];
 
   constructor(public paginationService: PaginationService) {}

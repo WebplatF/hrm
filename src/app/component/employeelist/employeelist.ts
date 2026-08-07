@@ -9,11 +9,12 @@ import { EmployeeRepositoryImpl } from './create-employee/repositories/employee.
 import { EmployeeService } from './create-employee/services/employee.service';
 import { ToastService } from '../../../service/toast/toast.service';
 import { Employee } from './model/employee.model';
+import { loading } from "../../../service/loading/loading";
 
 @Component({
   selector: 'app-employeelist',
   standalone: true,
-  imports: [CommonModule, Tablebody],
+  imports: [CommonModule, Tablebody, loading],
   templateUrl: './view/employeelist.html',
   styleUrl: './view/employeelist.scss',
   providers: [
@@ -28,6 +29,7 @@ export class Employeelist implements OnInit {
   private usecase = inject(EmployeeUseCase);
   private cd      = inject(ChangeDetectorRef);
   private toast   = inject(ToastService);
+  currentPage:number=1;
 
   title    = input<string>('Employee Management');
   subtitle = input<string>('Manage and monitor employee status and corporate records.');
@@ -40,21 +42,28 @@ export class Employeelist implements OnInit {
     { key: 'is_delete',    label: 'STATUS',          type: 'toggle' },
   ];
 
-  Employee: Employee[] = [];
+  Employees: Employee[] = [];
 
   ngOnInit(): void {
-    this.loadEmployees(); 
+    this.loadPage(this.currentPage)
+
   }
 
-  loadEmployees(): void {
+    loadPage(page:number){
+     this.loadEmployees(page);
+     this.currentPage=page;
+  }
+
+  loadEmployees(page:number): void {
     this.state.setLoading(true); 
-    this.usecase.getEmployeeList().subscribe({
+    this.usecase.getEmployeeList(page).subscribe({
       next: (res) => {
-         this.Employee = res.data.taskList;
+         this.Employees= res.data.taskList;
+         this.cd.detectChanges();
          this.toast.success(res.message);
          this.state.setLoading(false);
-         this.cd.detectChanges();
          this.state.setLoading(false);
+
       },
       error: (err) => {
          this.toast.error(err.error.message);
@@ -73,21 +82,21 @@ export class Employeelist implements OnInit {
     });
   }
 
-  onToggle(emp: Employee): void {
-    const payload = { is_delete: emp.is_delete === 0 };
-    this.state.setLoading(true);
-    this.usecase.toggleEmployee(emp.id, payload).subscribe({
-      next: (res) => {
-        if (res.status === 200) {
-          this.toast.success(res.message);
-          this.loadEmployees(); 
-        }
-        this.state.setLoading(false); 
-      },
-      error: (err) => {
-        this.toast.error(err?.error?.message || 'Something went wrong');
-        this.state.setLoading(false);
-      }
-    });
-  }
+  // onToggle(emp: Employee): void {
+  //   const payload = { is_delete: emp.is_delete === 0 };
+  //   this.state.setLoading(true);
+  //   this.usecase.toggleEmployee(emp.id, payload).subscribe({
+  //     next: (res) => {
+  //       if (res.status === 200) {
+  //         this.toast.success(res.message);
+  //         this.loadEmployees(); 
+  //       }
+  //       this.state.setLoading(false); 
+  //     },
+  //     error: (err) => {
+  //       this.toast.error(err?.error?.message || 'Something went wrong');
+  //       this.state.setLoading(false);
+  //     }
+  //   });
+  // }
 }

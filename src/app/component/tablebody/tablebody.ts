@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input,OnChanges,Output, SimpleChange } from '@angular/core';
+import { Component, EventEmitter, Input,OnChanges,Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { List } from '../list/list';
 import { Pagination } from '../../../service/pagination/pagination';
@@ -12,14 +12,14 @@ export interface TableColumn {
 
 @Component({
   selector: 'app-tablebody',
-  imports: [CommonModule, List,Pagination],
+  imports: [CommonModule, List, Pagination],
   templateUrl: './tablebody.html',
   styleUrls: ['./tablebody.scss'],
 })
-export class Tablebody {
+export class Tablebody<T> implements OnChanges {
   @Input() tableTitle: string = 'Employee Directory';
   @Input() columns: TableColumn[] = [];
-  @Input() data: any[] = [];
+  @Input() data: T[] = [];
   @Input() mode: 'employee' | 'leave'|'attendance' | 'permission'= 'employee';
   @Input() showActionLabel: boolean = false;
   @Input() showActions: boolean = false
@@ -33,13 +33,13 @@ export class Tablebody {
   /** Slice of `data` for the current page */
   pagedData: any[] = [];
 
-  // ngOnChanges(changes: SimpleChange): void {
-  //   // Reset to page 1 when data or limit changes
-  //   if (changes['data'] || changes['limit']) {
-  //     this.currentPage = 1;
-  //   }
-  //   this.updatePage();
-  // }
+  ngOnChanges(changes: SimpleChanges): void {
+    // Reset to page 1 when data or limit changes
+    if (changes['data'] || changes['limit']) {
+      this.currentPage = 1;
+    }
+    this.updatePage();
+  }
 
   onPageChange(page: number): void {
     this.currentPage = page;

@@ -7,8 +7,8 @@ import {CreateEmployeeRequest, CreateEmployeeResponse, EmployeeListResponse ,Tog
 export class EmployeeUseCase {
   private repo = inject(EmployeeRepository);
 
-  getEmployeeList(): Observable<EmployeeListResponse> {
-    return this.repo.getEmployeeList();
+  getEmployeeList(page:number): Observable<EmployeeListResponse> {
+    return this.repo.getEmployeeList(page);
   }
 
   createEmployee(data: CreateEmployeeRequest): Observable<CreateEmployeeResponse> { 

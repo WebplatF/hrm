@@ -7,8 +7,8 @@ import { CreateEmployeeRequest, CreateEmployeeResponse,EmployeeListResponse ,Tog
 export class EmployeeService {
   private http = inject(HttpEngine); 
 
-  getEmployeeList(): Observable<EmployeeListResponse> {
-    return this.http.get<EmployeeListResponse>('/employee', true);
+  getEmployeeList(page: number): Observable<EmployeeListResponse> {
+    return this.http.get<EmployeeListResponse>(`/employee?page=${page}`, true);
   }
 
     createEmployee(data: CreateEmployeeRequest): Observable<CreateEmployeeResponse> { 

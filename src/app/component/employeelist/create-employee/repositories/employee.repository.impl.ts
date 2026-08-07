@@ -8,8 +8,8 @@ import { EmployeeService } from '../services/employee.service';
 export class EmployeeRepositoryImpl implements EmployeeRepository {
   private service = inject(EmployeeService);
 
-  getEmployeeList(): Observable<EmployeeListResponse> {
-    return this.service.getEmployeeList();
+  getEmployeeList(page:number): Observable<EmployeeListResponse> {
+    return this.service.getEmployeeList(page);
   }
 
    createEmployee(data: CreateEmployeeRequest): Observable<CreateEmployeeResponse> { 
